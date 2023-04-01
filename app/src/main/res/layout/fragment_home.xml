@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.fragments.HomeFragment">
+    tools:context=".ui.main.fragments.HomeFragment"
+    android:background="@color/gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upperLayout"
@@ -14,46 +15,46 @@
         android:layout_height="0dp"
         android:background="@drawable/upper_layout_red_background"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/centerLayout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/lowerLayout"
-        app:layout_constraintVertical_weight="0.9"
-        >
+        app:layout_constraintVertical_weight="0.9">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/upperLeftMarginLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/upperConstraintLayout_Status"
-            app:layout_constraintHorizontal_weight="0.3"/>
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/upperConstraintLayout_Status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toEndOf="@id/upperLeftMarginLayout"
             app:layout_constraintEnd_toStartOf="@+id/upperRightMarginLayout"
-            app:layout_constraintHorizontal_weight="1">
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/upperLeftMarginLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/upperCircleTopMarginLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintVertical_weight="0.3"
+                app:layout_constraintBottom_toTopOf="@id/upperCircleLayout"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/upperCircleLayout"/>
+                app:layout_constraintVertical_weight="0.3" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/upperCircleLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/upper_status_textview_background"
+                app:layout_constraintBottom_toTopOf="@id/upperCircleBottomMarginLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/upperCircleTopMarginLayout"
-                app:layout_constraintBottom_toTopOf="@id/upperCircleBottomMarginLayout"
-                app:layout_constraintVertical_weight="2"
-                app:layout_constraintVertical_chainStyle="packed">
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_weight="2">
 
                 <TextView
                     android:id="@+id/upperCircleStatusTitle"
@@ -62,10 +63,10 @@
                     android:text="상태"
                     android:textColor="@color/red_bad"
                     android:textSize="35dp"
+                    app:layout_constraintBottom_toTopOf="@+id/upperCircleStatusDesc"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/upperCircleStatusDesc"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/upperCircleStatusDesc"
@@ -77,8 +78,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/upperCircleStatusTitle"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/upperCircleStatusTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,9 +86,9 @@
                 android:id="@+id/upperCircleBottomMarginLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/upperCircleLayout"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_weight="0.3"/>
+                app:layout_constraintTop_toBottomOf="@id/upperCircleLayout"
+                app:layout_constraintVertical_weight="0.3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,14 +96,200 @@
             android:id="@+id/upperRightMarginLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toEndOf="@id/upperConstraintLayout_Status"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="0.3"/>
-
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@id/upperConstraintLayout_Status" />
 
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/centerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/upperLayout"
+        app:layout_constraintBottom_toTopOf="@id/lowerLayout"
+        app:layout_constraintVertical_weight="0.2"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerStatusUpBackgroundLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/centerStatusLowBackgroundLayout"
+                android:background="@drawable/center_layout_red_background"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerStatusLowBackgroundLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintTop_toBottomOf="@+id/centerStatusUpBackgroundLayout"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerLeftMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/centerStatusLayout"
+                app:layout_constraintHorizontal_weight="0.3"
+                >
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerStatusBackgroundLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/centerLeftMarginLayout"
+                app:layout_constraintEnd_toStartOf="@id/centerRightMarginLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerStatusLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/centerLeftMarginLayout"
+                app:layout_constraintEnd_toStartOf="@id/centerRightMarginLayout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:background="@drawable/center_layout_status_background">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/waterTemperatureLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/phLayout"
+                    app:layout_constraintHorizontal_weight="1">
+
+                    <TextView
+                        android:id="@+id/waterTemperatureTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/waterTemperatureData"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="수온"
+                        android:textAlignment="center"
+                        android:textSize="25dp"
+                        android:textColor="@color/data_skyblue"/>
+
+                    <TextView
+                        android:id="@+id/waterTemperatureData"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@id/waterTemperatureTitle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textSize="20dp"
+                        android:textColor="@color/data_skyblue"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/phLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/waterTemperatureLayout"
+                    app:layout_constraintEnd_toStartOf="@+id/foodLayout"
+                    app:layout_constraintHorizontal_weight="1">
+
+                    <TextView
+                        android:id="@+id/phTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/phData"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="PH"
+                        android:textAlignment="center"
+                        android:textSize="25dp"
+                        android:textColor="@color/data_skyblue"/>
+
+                    <TextView
+                        android:id="@+id/phData"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@+id/phTitle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="7.0"
+                        android:textAlignment="center"
+                        android:textSize="20dp"
+                        android:textColor="@color/data_skyblue"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/foodLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/phLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1">
+
+                    <TextView
+                        android:id="@+id/foodTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/foodData"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="먹이"
+                        android:textAlignment="center"
+                        android:textSize="25dp"
+                        android:textColor="@color/data_skyblue"
+                        />
+
+                    <TextView
+                        android:id="@+id/foodData"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@id/foodTitle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_weight="1"
+                        android:text="14시간"
+                        android:textAlignment="center"
+                        android:textSize="20dp"
+                        android:textColor="@color/data_skyblue"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/centerRightMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@+id/centerStatusLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.3"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lowerLayout"
@@ -111,8 +297,13 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upperLayout"
+        app:layout_constraintTop_toBottomOf="@id/centerLayout"
         app:layout_constraintVertical_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_home_recycler_view"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

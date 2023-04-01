@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Gold">#FFFFD700</color>
     <color name="skyblue">#A8DCE7</color>
+    <color name="data_skyblue">#74D6EA</color>
     <color name="red_bad">#F06C83</color>
+    <color name="gray">#EEEAEA</color>
 </resources>
