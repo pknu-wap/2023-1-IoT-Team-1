@@ -10,7 +10,7 @@
 
 /* 1. Define the WiFi credentials */
 #define WIFI_SSID "AndroidHotspot1440"
-#define WIFI_PASSWORD "84571440"
+#define WIFI_PASSWORD "password"
 
 // For the following credentials, see examples/Authentications/SignInAsUser/EmailPassword/EmailPassword.ino
 
