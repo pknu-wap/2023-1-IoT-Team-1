@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "564578267094",
+    "firebase_url": "https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "wap-iot-9494c",
+    "storage_bucket": "wap-iot-9494c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564578267094:android:cd99035b05ddc117667e77",
+        "android_client_info": {
+          "package_name": "com.example.fishfarmapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564578267094-8gh31i1mib735k9r81nc1rpcp61b4ajh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC60mD1gQEm-fzhV-18b1AVqX-tHw4wnnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564578267094-8gh31i1mib735k9r81nc1rpcp61b4ajh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
