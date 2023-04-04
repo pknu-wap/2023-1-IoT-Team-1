@@ -7,10 +7,11 @@ import androidx.fragment.app.FragmentManager
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.fragments.GraphFragment
 import com.example.fishfarmapplication.ui.main.fragments.HomeFragment
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
-
     companion object{
         private const val TAG_HOME = "home_fragment"
         private const val TAG_GRAPH = "graph_fragment"
