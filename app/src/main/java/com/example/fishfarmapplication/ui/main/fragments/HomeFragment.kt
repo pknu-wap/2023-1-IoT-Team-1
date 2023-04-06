@@ -6,28 +6,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fishfarmapplication.R
+import com.example.fishfarmapplication.databinding.FragmentHomeBinding
 import com.example.fishfarmapplication.ui.main.MainViewModel
+import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
+import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
+import com.example.fishfarmapplication.ui.main.recyclerviews.HomelistItem
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
+    private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        binding = FragmentHomeBinding.inflate(inflater, container,false)
+
+        val itemList = ArrayList<HomelistItem>()
+        itemList.add(HomelistItem("수온","테스트"))
+        itemList.add(HomelistItem("수온2","테스트"))
+
+        val itemAdapter = HomeListAdapter(itemList)
+        val itemDeco = HomeListDeco(30)
+        itemAdapter.notifyDataSetChanged()
+        binding.homeRecyclerView.adapter = itemAdapter
+        binding.homeRecyclerView.addItemDecoration(itemDeco)
+        return binding.root
     }
 
 }

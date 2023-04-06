@@ -108,7 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/upperLayout"
-        app:layout_constraintBottom_toTopOf="@id/lowerLayout"
+        app:layout_constraintBottom_toTopOf="@id/homeCenterLowerMarginLayout"
         app:layout_constraintVertical_weight="0.2"
         >
 
@@ -289,6 +289,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeCenterLowerMarginLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/centerLayout"
+        app:layout_constraintBottom_toTopOf="@id/lowerLayout"
+        app:layout_constraintVertical_weight="0.08"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lowerLayout"
@@ -296,13 +303,36 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/centerLayout"
+        app:layout_constraintTop_toBottomOf="@id/homeCenterLowerMarginLayout"
         app:layout_constraintVertical_weight="1">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homelowerleftMarginLayout"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_home_recycler_view"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/homeRecyclerView"
+            app:layout_constraintHorizontal_weight="1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_home_recycler_view"
+            app:layout_constraintStart_toEndOf="@+id/homelowerleftMarginLayout"
+            app:layout_constraintEnd_toStartOf="@+id/homelowerRightMarginLayout"
+            app:layout_constraintHorizontal_weight="40"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homelowerRightMarginLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/homeRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
