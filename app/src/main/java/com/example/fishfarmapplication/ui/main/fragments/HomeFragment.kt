@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
         val itemList = ArrayList<HomelistItem>()
         itemList.add(HomelistItem("수온","테스트"))
         itemList.add(HomelistItem("수온2","테스트"))
+        itemList.add(HomelistItem("수온3","테스트"))
 
         val itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)

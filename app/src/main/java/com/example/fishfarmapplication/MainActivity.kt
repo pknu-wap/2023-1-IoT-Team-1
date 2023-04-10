@@ -4,25 +4,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.fragments.GraphFragment
 import com.example.fishfarmapplication.ui.main.fragments.HomeFragment
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+private const val TAG_HOME = "home_fragment"
+private const val TAG_GRAPH = "graph_fragment"
+private const val TAG_LED = "led_fragment"
+private const val TAG_MEDICINE = "medicine_fragment"
+private const val TAG_MYPAGE = "mypage_fragment"
 
 class MainActivity : AppCompatActivity() {
-    companion object{
-        private const val TAG_HOME = "home_fragment"
-        private const val TAG_GRAPH = "graph_fragment"
-    }
-
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val view = binding.root
+        setContentView(view)
 
         setFragment(TAG_HOME,HomeFragment())
 
@@ -37,9 +39,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun setFragment(tag: String, fragment: Fragment){
+    fun setFragment(tag: String, fragment: Fragment){
         val manager: FragmentManager = supportFragmentManager
-        val fragTransaction = manager.beginTransaction()
+        val fragTransaction: FragmentTransaction = manager.beginTransaction()
 
         if (manager.findFragmentByTag(tag) == null){
             fragTransaction.add(R.id.mainFrameLayout,fragment,tag)
@@ -47,19 +49,28 @@ class MainActivity : AppCompatActivity() {
 
         val home = manager.findFragmentByTag(TAG_HOME)
         val graph = manager.findFragmentByTag(TAG_GRAPH)
+        val led = manager.findFragmentByTag(TAG_LED)
+        val medicine = manager.findFragmentByTag(TAG_MEDICINE)
+        val mypage= manager.findFragmentByTag(TAG_MYPAGE)
 
-        if(home != null)
-            fragTransaction.hide(home)
-        if (graph != null)
-            fragTransaction.hide(graph)
+        home?.let { fragTransaction.hide(it) }
+        graph?.let { fragTransaction.hide(it) }
+        led?.let { fragTransaction.hide(it) }
+        medicine?.let { fragTransaction.hide(it) }
+        mypage?.let { fragTransaction.hide(it) }
+        
+        //현재 페이지 상태를 flag로 저장해놓면 위와 같은 짓을 안해도 되긴함
 
-        if (tag== TAG_HOME)
-            if(home!= null)
-                fragTransaction.show(home)
-        else if (tag== TAG_GRAPH)
-            if (graph!=null)
-                fragTransaction.show(graph)
+        when(tag){
+            TAG_HOME-> home?.let { fragTransaction.show(it) }
+            TAG_GRAPH-> graph?.let { fragTransaction.show(it) }
+            TAG_LED->graph?.let { fragTransaction.show(it) }
+            TAG_MEDICINE->medicine?.let{fragTransaction.show(it)}
+            TAG_MYPAGE->mypage?.let { fragTransaction.show(it) }
+        }
+
 
         fragTransaction.commitAllowingStateLoss()
     }
+
 }
