@@ -123,7 +123,7 @@
                 app:layout_constraintVertical_weight="1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/homeCenterStatusLowBackgroundLayout"
-                android:background="@drawable/center_layout_red_background"/>
+                android:background="@drawable/home_center_layout_red_background"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homeCenterStatusLowBackgroundLayout"
@@ -171,7 +171,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                android:background="@drawable/center_layout_status_background">
+                android:background="@drawable/home_center_layout_status_background">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/homeWaterTemperatureLayout"
