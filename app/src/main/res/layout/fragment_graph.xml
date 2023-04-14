@@ -59,6 +59,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_weight="5">
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/testChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
