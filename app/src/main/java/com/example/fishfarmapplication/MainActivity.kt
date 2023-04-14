@@ -2,6 +2,7 @@ package com.example.fishfarmapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        val actionbar = supportActionBar
+        actionbar?.hide()
 
         setFragment(TAG_HOME,HomeFragment())
 
