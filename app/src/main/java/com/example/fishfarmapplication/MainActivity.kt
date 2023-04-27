@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.fragments.GraphFragment
 import com.example.fishfarmapplication.ui.main.fragments.HomeFragment
+import com.example.fishfarmapplication.ui.main.fragments.LedFragment
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.homeFragment -> setFragment(TAG_HOME, HomeFragment())
                 R.id.graphFragment -> setFragment(TAG_GRAPH,GraphFragment())
+                R.id.LedFragment -> setFragment(TAG_LED, LedFragment())
             }
             true
         }

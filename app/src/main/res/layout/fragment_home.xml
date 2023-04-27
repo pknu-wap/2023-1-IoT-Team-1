@@ -99,8 +99,6 @@
             app:layout_constraintHorizontal_weight="0.3"
             app:layout_constraintStart_toEndOf="@id/homeUpperConstraintLayout_Status" />
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
