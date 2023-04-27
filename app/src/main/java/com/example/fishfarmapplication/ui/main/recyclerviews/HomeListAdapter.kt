@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fishfarmapplication.R
 
-class HomeListAdapter (val itemList: ArrayList<HomelistItem>)
+class HomeListAdapter (val itemList: ArrayList<HomeListItem>)
     :RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>(){
     inner class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val titleView: TextView = itemView.findViewById<TextView>(R.id.itemDescTitle)
@@ -35,4 +35,4 @@ class HomeListAdapter (val itemList: ArrayList<HomelistItem>)
 
 }
 
-data class HomelistItem(val title:String,val data:String);
+data class HomeListItem(val title:String, val data:String);

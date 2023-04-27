@@ -10,7 +10,7 @@ import com.example.fishfarmapplication.databinding.FragmentHomeBinding
 import com.example.fishfarmapplication.ui.main.MainViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
-import com.example.fishfarmapplication.ui.main.recyclerviews.HomelistItem
+import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
 
 class HomeFragment : Fragment() {
 
@@ -30,10 +30,10 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding = FragmentHomeBinding.inflate(inflater, container,false)
 
-        val itemList = ArrayList<HomelistItem>()
-        itemList.add(HomelistItem("수온","테스트"))
-        itemList.add(HomelistItem("수온2","테스트"))
-        itemList.add(HomelistItem("수온3","테스트"))
+        val itemList = ArrayList<HomeListItem>()
+        itemList.add(HomeListItem("수온","테스트"))
+        itemList.add(HomeListItem("수온2","테스트"))
+        itemList.add(HomeListItem("수온3","테스트"))
 
         val itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)
@@ -41,6 +41,14 @@ class HomeFragment : Fragment() {
         binding.homeRecyclerView.adapter = itemAdapter
         binding.homeRecyclerView.addItemDecoration(itemDeco)
         return binding.root
+    }
+
+    companion object{
+        fun newInstance(title:String) = HomeFragment().apply {
+            arguments = Bundle().apply {
+                putString("title", title)
+            }
+        }
     }
 
 }

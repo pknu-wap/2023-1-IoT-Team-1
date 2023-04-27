@@ -96,10 +96,13 @@
             android:id="@+id/ledColorSelectScroll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ledPowerButtonLayout"
             app:layout_constraintVertical_weight="1"
+            tools:listitem="@layout/item_led_recycler_view"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
