@@ -12,4 +12,7 @@
     <color name="data_skyblue">#74D6EA</color>
     <color name="red_bad">#F06C83</color>
     <color name="gray">#EEEAEA</color>
+    <color name="led_select_green">#1CFF08</color>
+    <color name="led_select_blue">#0821FF</color>
+    <color name="led_select_red">#F94E6C</color>
 </resources>

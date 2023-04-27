@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-    
+
     private fun hideActionBar(){
         val actionbar = supportActionBar
         actionbar?.hide()

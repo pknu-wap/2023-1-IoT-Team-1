@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.FragmentLedBinding
 import com.example.fishfarmapplication.ui.main.MainViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.*
@@ -28,9 +29,9 @@ class LedFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding = FragmentLedBinding.inflate(inflater, container,false)
         val itemList = ArrayList<LedColorSelectListItem>()
-        itemList.add(LedColorSelectListItem("1"))
-        itemList.add(LedColorSelectListItem("2"))
-        itemList.add(LedColorSelectListItem("3"))
+        itemList.add(LedColorSelectListItem(R.color.led_select_green))
+        itemList.add(LedColorSelectListItem(R.color.led_select_blue))
+        itemList.add(LedColorSelectListItem(R.color.led_select_red))
 
         val itemAdapter = LedColorSelectListAdapter(itemList)
         itemAdapter.notifyDataSetChanged()
