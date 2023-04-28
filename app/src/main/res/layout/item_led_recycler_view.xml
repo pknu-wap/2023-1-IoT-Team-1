@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ledItemCenterMariginLayout"
-        app:layout_constraintHorizontal_weight="0.2"/>
+        app:layout_constraintHorizontal_weight="0.4"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ledItemCenterMariginLayout"
@@ -54,6 +54,6 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@id/ledItemCenterMariginLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="0.2"/>
+        app:layout_constraintHorizontal_weight="0.4"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

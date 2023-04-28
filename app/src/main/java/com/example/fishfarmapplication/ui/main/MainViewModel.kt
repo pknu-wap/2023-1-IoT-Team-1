@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fishfarmapplication.ui.main.fragments.PageType
 
+//프래그먼트 창 변환을 위한 뷰모델
 class MainViewModel : ViewModel() {
     private var _fragmentStatus = MutableLiveData<PageType>()
     val fragmentStatus : LiveData<PageType> get() = _fragmentStatus
