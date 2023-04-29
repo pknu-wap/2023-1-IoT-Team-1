@@ -15,7 +15,7 @@
 // For the following credentials, see examples/Authentications/SignInAsUser/EmailPassword/EmailPassword.ino
 
 /* 2. Define the API Key */
-#define API_KEY "AIzaSyC-6NICSOLSELbhR4HP4Ef_MBNAocB0vdQ"
+#define API_KEY "API_KEY"
 
 /* 3. Define the RTDB URL */
 #define DATABASE_URL "test-for-connect-3424c-default-rtdb.asia-southeast1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
