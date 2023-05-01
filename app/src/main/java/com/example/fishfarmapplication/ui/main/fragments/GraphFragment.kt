@@ -84,25 +84,4 @@ class GraphFragment : Fragment() {
 
         return binding.root
     }
-
-    fun loadMsgs() {
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                entries.clear()
-                var i = 1
-                for (item in snapshot.children) {
-                    Log.d("파이어베이스", item.value.toString())
-                    Log.d("파이어베이스", item.toString())
-                    val test: Float = String.valueOf(item.value).toFloat()
-                    entries.add(Entry(i.toFloat(), test))
-                    i += 1
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                print(error.message)
-            }
-        })
-    }
 }
