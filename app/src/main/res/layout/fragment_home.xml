@@ -157,7 +157,8 @@
                 app:layout_constraintEnd_toStartOf="@id/homeCenterRightMarginLayout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_weight="1"/>
+                app:layout_constraintHorizontal_weight="1"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homeCenterStatusLayout"

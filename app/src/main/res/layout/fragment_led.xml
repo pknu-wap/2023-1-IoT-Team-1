@@ -108,21 +108,65 @@
             android:orientation="horizontal"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ledPowerButtonLayout"
+            app:layout_constraintBottom_toTopOf="@id/ledLowCenterMarginLayout"
             app:layout_constraintVertical_weight="1"
             tools:listitem="@layout/item_led_recycler_view"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ledPowerButtonLayout"
+            android:id="@+id/ledLowCenterMarginLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/ledColorSelectScroll"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_weight="1">
+            app:layout_constraintBottom_toTopOf="@id/ledPowerButtonLayout"
+            app:layout_constraintVertical_weight="0.1"/>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ledPowerButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/ledLowCenterMarginLayout"
+            app:layout_constraintBottom_toBottomOf="@id/ledPowerButtonLowMarginLayout"
+            app:layout_constraintVertical_weight="1"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ledPowerButtonLeftMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ledPowerButtonCenterLayout"
+                app:layout_constraintHorizontal_weight="0.1"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ledPowerButtonCenterLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/ledPowerButtonLeftMarginLayout"
+                app:layout_constraintEnd_toStartOf="@id/ledPowerButtonRightMarginLayout"
+                app:layout_constraintHorizontal_weight="1"
+                android:background="@drawable/led_power_btn">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ledPowerButtonRightMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/ledPowerButtonCenterLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.1"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ledPowerButtonLowMarginLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/ledPowerButtonLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_weight="0.1"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
