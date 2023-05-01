@@ -6,19 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import com.example.fishfarmapplication.databinding.FragmentHomeBinding
-import com.example.fishfarmapplication.ui.main.MainViewModel
+import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
+import com.example.fishfarmapplication.ui.main.viewmodels.DataViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: PageViewModel
+    private val dataViewModel: DataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PageViewModel::class.java)
         binding = FragmentHomeBinding.inflate(inflater, container,false)
 
         val itemList = ArrayList<HomeListItem>()
@@ -61,9 +62,6 @@ class HomeFragment : Fragment() {
 
 
 
-    fun initPopUpViewCenterStatus(){
 
-
-    }
 
 }

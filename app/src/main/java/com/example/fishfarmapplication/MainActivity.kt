@@ -3,16 +3,19 @@ package com.example.fishfarmapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
-import com.example.fishfarmapplication.ui.main.MainViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.example.fishfarmapplication.ui.main.models.databases.AppDatabase
+import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.viewmodels.DataViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 private const val TAG_HOME = "home_fragment"
@@ -23,7 +26,8 @@ private const val TAG_MYPAGE = "mypage_fragment"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: PageViewModel by viewModels()
+    private val dataViewModel: DataViewModel by viewModels()
 
     private val HomeFragment by lazy { HomeFragment() }
     private val LedFragment by lazy { LedFragment() }
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         hideActionBar()
+
 
         viewModel.fragmentStatus.observe(this, Observer {
             when(it){
@@ -113,5 +118,9 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
     }
+
+
+
+
 
 }
