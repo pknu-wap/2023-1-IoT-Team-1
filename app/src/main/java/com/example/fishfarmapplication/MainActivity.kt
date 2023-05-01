@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
-import com.example.fishfarmapplication.ui.main.models.databases.AppDatabase
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
-import com.example.fishfarmapplication.ui.main.viewmodels.DataViewModel
-import kotlinx.coroutines.CoroutineScope
+import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,7 +23,7 @@ private const val TAG_MYPAGE = "mypage_fragment"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val viewModel: PageViewModel by viewModels()
-    private val dataViewModel: DataViewModel by viewModels()
+    private val graphDataViewModel: GraphDataViewModel by viewModels()
 
     private val HomeFragment by lazy { HomeFragment() }
     private val LedFragment by lazy { LedFragment() }
@@ -38,6 +34,14 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         hideActionBar()
+
+        lifecycleScope.launch(Dispatchers.IO){
+//            dataViewModel.deleteAll()
+//            dataViewModel.insert(WaterTemperatureEntity(1F,2F))
+//            dataViewModel.insert(WaterTemperatureEntity(1.3F,4F))
+//            dataViewModel.insert(WaterTemperatureEntity(1.6F,5F))
+        }
+
 
 
         viewModel.fragmentStatus.observe(this, Observer {

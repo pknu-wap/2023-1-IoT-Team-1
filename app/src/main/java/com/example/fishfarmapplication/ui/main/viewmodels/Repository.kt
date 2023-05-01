@@ -7,7 +7,7 @@ import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEnt
 class Repository(mDatabase: AppDatabase) {
     private val dao = mDatabase.dao()
 
-    val allWaterTemperatures : LiveData<List<WaterTemperatureEntity>> = dao.getAll()
+    val allWaterTemperatures : LiveData<List<WaterTemperatureEntity>> = dao.getAllWaterTemperature()
 
     companion object{
         private var sInstance : Repository? = null
@@ -25,11 +25,11 @@ class Repository(mDatabase: AppDatabase) {
         dao.insert(entity)
     }
 
-    suspend fun delete(entity: WaterTemperatureEntity){
-        dao.delete(entity)
+    suspend fun deleteWaterTemperature(entity: WaterTemperatureEntity){
+
     }
-    suspend fun deleteAll(){
-        dao.deleteAll()
+    suspend fun deleteAllWaterTemperature(){
+        dao.deleteAllWaterTemperature()
     }
 
 }

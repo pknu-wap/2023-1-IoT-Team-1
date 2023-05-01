@@ -8,18 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.fishfarmapplication.databinding.FragmentHomeBinding
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
-import com.example.fishfarmapplication.ui.main.viewmodels.DataViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewModel: PageViewModel
-    private val dataViewModel: DataViewModel by viewModels()
+    private val graphDataViewModel: GraphDataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
