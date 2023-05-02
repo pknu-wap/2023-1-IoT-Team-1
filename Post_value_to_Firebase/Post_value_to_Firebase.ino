@@ -2,7 +2,7 @@
 #include <Firebase_ESP_Client.h>
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
-
+#include <OneWire.h>
 
 #define WIFI_SSID "AndroidHotspot1440"
 #define WIFI_PASSWORD "password"
@@ -14,6 +14,12 @@
 
 #define USER_EMAIL "mithmake@gmail.com"
 #define USER_PASSWORD "password"
+
+// Set Sensor Pins
+#define TRIG 9
+#define ECHO 8
+#define PIN_RED 23
+#define 
 
 FirebaseData fbdo;
 FirebaseAuth auth;

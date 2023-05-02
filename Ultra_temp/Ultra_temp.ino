@@ -6,19 +6,19 @@
 #include <addons/RTDBHelper.h>
 
 #define WIFI_SSID "AndroidHotspot1440"
-#define WIFI_PASSWORD "password"
+#define WIFI_PASSWORD "84571440"
 
-#define API_KEY "API_KEY"
+#define API_KEY "password"
 #define DATABASE_URL "test-for-connect-3424c-default-rtdb.asia-southeast1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
 #define USER_EMAIL "mithmake@gmail.com"
-#define USER_PASSWORD "mith9372/"
+#define USER_PASSWORD "password"
 
-#define TRIG 9
-#define ECHO 8
-#define PIN_RED 23
-#define PIN_GREEN 22
-#define PIN_BLUE 21
+#define TRIG 32
+#define ECHO 33
+#define PIN_RED 25
+#define PIN_GREEN 26
+#define PIN_BLUE 27
 
 int DS_pin = 2;
 int red = 11;
@@ -135,40 +135,33 @@ void loop()
   Firebase.ready();
   Firebase.authenticated();
 
-  float temp = getTmep();
+  float temp = getTemp();
   long distance_meal = Ultra();
   Serial.println(temp);
   
   if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0))
   {
     sendDataPrevMillis = millis();
-
     Serial.printf("Set bool... %s\n", Firebase.RTDB.setBool(&fbdo, F("/test/bool"), count % 2 == 0) ? "ok" : fbdo.errorReason().c_str());
-
     Serial.printf("Get bool... %s\n", Firebase.RTDB.getBool(&fbdo, FPSTR("/test/bool")) ? fbdo.to<bool>() ? "true" : "false" : fbdo.errorReason().c_str());
 
     bool bVal;
     Serial.printf("Get bool ref... %s\n", Firebase.RTDB.getBool(&fbdo, F("/test/bool"), &bVal) ? bVal ? "true" : "false" : fbdo.errorReason().c_str());
-
     Serial.printf("Set int... %s\n", Firebase.RTDB.setInt(&fbdo, F("/test/int"), count) ? "ok" : fbdo.errorReason().c_str());
-
     Serial.printf("Get int... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/int")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
 
     int iVal = 0;
-    Serial.printf("Get int ref... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/int"), &iVal) ? String(iVal).c_str() : fbdo.errorReason().c_str());
-
+    Serial.printf("Get int ref... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/int"), &distance_meal) ? String(distance_meal).c_str() : fbdo.errorReason().c_str());
     Serial.printf("Set float... %s\n", Firebase.RTDB.setFloat(&fbdo, F("/test/float"), count + 10.2) ? "ok" : fbdo.errorReason().c_str());
-
     Serial.printf("Get float... %s\n", Firebase.RTDB.getFloat(&fbdo, F("/test/float")) ? String(fbdo.to<float>()).c_str() : fbdo.errorReason().c_str());
-
     Serial.printf("Set double... %s\n", Firebase.RTDB.setDouble(&fbdo, F("/test/double"), count + 35.517549723765) ? "ok" : fbdo.errorReason().c_str());
-
     Serial.printf("Get double... %s\n", Firebase.RTDB.getDouble(&fbdo, F("/test/double")) ? String(fbdo.to<double>()).c_str() : fbdo.errorReason().c_str());
-
     Serial.printf("Set string... %s\n", Firebase.RTDB.setString(&fbdo, F("/test/string"), F("Hello World!")) ? "ok" : fbdo.errorReason().c_str());
-
     Serial.printf("Get string... %s\n", Firebase.RTDB.getString(&fbdo, F("/test/string")) ? fbdo.to<const char *>() : fbdo.errorReason().c_str());
 
+//    Serial.printf("Set distacne... %s\n", Firebase.RTDB.setInt(&fbdo, F("/test/distance"), count) ? "ok" : fbdo.errorReason().c_str());
+//    Serial.printf("Get distance... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/distance"), count) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
+//    Serial.printf("Get distance ref... %s\n", Firebase.RTDB.getInt(&fbdo, F("/test/distance"), &distance_meal) ? String(distance_meal).c_str() : fbdo.errorReason().c_str());
     // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create_Edit_Parse.ino
     FirebaseJson json;
 
@@ -185,7 +178,6 @@ void loop()
     }
 
     Serial.println();
-
     count++;
   }
 }
