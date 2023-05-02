@@ -168,6 +168,14 @@
             app:layout_constraintVertical_weight="0.1"
             />
 
+        <Button
+            android:id="@+id/btnLed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LED ON"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="60dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,10 +10,16 @@ import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.FragmentLedBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class LedFragment : Fragment() {
-    private lateinit var binding : FragmentLedBinding
+    var ledState: Int = 1
+    private val database =
+        Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    private val ledRef = database.getReference("led")
+    private lateinit var binding: FragmentLedBinding
     private lateinit var viewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +31,7 @@ class LedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(PageViewModel::class.java)
-        binding = FragmentLedBinding.inflate(inflater, container,false)
+        binding = FragmentLedBinding.inflate(inflater, container, false)
         val itemList = ArrayList<LedColorSelectListItem>()
         itemList.add(LedColorSelectListItem(R.color.led_select_green))
         itemList.add(LedColorSelectListItem(R.color.led_select_blue))
@@ -34,8 +40,20 @@ class LedFragment : Fragment() {
         val itemAdapter = LedColorSelectListAdapter(itemList)
         itemAdapter.notifyDataSetChanged()
         binding.ledColorSelectScroll.adapter = itemAdapter
+        binding.btnLed.setOnClickListener {
+            setBtnText()
+        }
         return binding.root
 
+    }
+
+    fun setBtnText() {
+        binding.btnLed.text = if (ledState > 0) {
+            "LED ON"
+        } else {
+            "LED OFF"
+        }
+        ledState *= -1
     }
 
 }
