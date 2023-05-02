@@ -8,7 +8,7 @@
 #define WIFI_SSID "AndroidHotspot1440"
 #define WIFI_PASSWORD "password"
 
-#define API_KEY "AIzaSyC-6NICSOLSELbhR4HP4Ef_MBNAocB0vdQ"
+#define API_KEY "API_KEY"
 #define DATABASE_URL "test-for-connect-3424c-default-rtdb.asia-southeast1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
 #define USER_EMAIL "mithmake@gmail.com"
@@ -16,6 +16,9 @@
 
 #define TRIG 9
 #define ECHO 8
+#define PIN_RED 23
+#define PIN_GREEN 22
+#define PIN_BLUE 21
 
 int DS_pin = 2;
 int red = 11;
