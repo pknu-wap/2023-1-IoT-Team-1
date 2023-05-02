@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
+import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
 import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,9 +26,6 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: PageViewModel by viewModels()
     private val graphDataViewModel: GraphDataViewModel by viewModels()
 
-    private val HomeFragment by lazy { HomeFragment() }
-    private val LedFragment by lazy { LedFragment() }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -36,10 +34,10 @@ class MainActivity : AppCompatActivity() {
         hideActionBar()
 
         lifecycleScope.launch(Dispatchers.IO){
-//            dataViewModel.deleteAll()
-//            dataViewModel.insert(WaterTemperatureEntity(1F,2F))
-//            dataViewModel.insert(WaterTemperatureEntity(1.3F,4F))
-//            dataViewModel.insert(WaterTemperatureEntity(1.6F,5F))
+//            graphDataViewModel.deleteAllWaterTemperature()
+//            graphDataViewModel.insert(WaterTemperatureEntity(1F,2F))
+//            graphDataViewModel.insert(WaterTemperatureEntity(2F,4F))
+//            graphDataViewModel.insert(WaterTemperatureEntity(3F,5F))
         }
 
 

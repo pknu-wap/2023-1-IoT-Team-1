@@ -20,7 +20,7 @@ class Repository(mDatabase: AppDatabase) {
                 }
         }
     }
-
+    
     suspend fun insert(entity: WaterTemperatureEntity){
         dao.insert(entity)
     }

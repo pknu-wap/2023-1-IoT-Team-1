@@ -1,7 +1,6 @@
 package com.example.fishfarmapplication.ui.main
 
 import android.graphics.Color
-import android.util.Log
 import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -10,17 +9,24 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import java.sql.Date
-import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 
 class Graph(val _chart: LineChart) {
-    private val chartData = ArrayList<Entry>()
-    private val lineChart = _chart;
+    private var chartData = ArrayList<Entry>()
+    private var lineChart = _chart;
+    constructor(_chart: LineChart, _chartData: List<WaterTemperatureEntity>):this(_chart){
+        this.lineChart = _chart;
+        decoGraph()
+        initData(_chartData)
+    }
     init {
+        decoGraph()
+    }
+
+    fun decoGraph(){
         //차트의 범례 설정
         val legend = lineChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
@@ -51,8 +57,6 @@ class Graph(val _chart: LineChart) {
 
         xAxis.valueFormatter = TimeAxisValueFormat()
 
-
-
         // YAxis(Right) (왼쪽) - 선 유무, 데이터 최솟값/최댓값, 색상
         val yAxisLeft = lineChart.axisLeft
         yAxisLeft.textSize = 14f
@@ -69,40 +73,43 @@ class Graph(val _chart: LineChart) {
         yAxis.setDrawAxisLine(false)
         yAxis.axisLineWidth = 2f
         yAxis.axisMinimum = 0f // 최솟값
-
     }
 
-    fun setData(data : List<WaterTemperatureEntity>){
-        clearData()
+    fun initData(data :List<WaterTemperatureEntity>){
         data.forEach {
             chartData.add(Entry(it.time,it.temperature))
         }
 
-        val lineDataSet = LineDataSet(chartData, "수온")
-        lineDataSet.lineWidth = 2f
-        lineDataSet.circleRadius = 6f
-        lineDataSet.setDrawCircleHole(true)
-        lineDataSet.setDrawCircles(true)
+        val dataSet = LineDataSet(chartData, "수온")
+        dataSet.lineWidth = 2f
+        dataSet.circleRadius = 6f
+        dataSet.setDrawCircleHole(true)
+        dataSet.setDrawCircles(true)
 
+//        val xAxis = lineChart.xAxis
+//        xAxis.position = XAxis.XAxisPosition.BOTTOM
+//        xAxis.textColor = Color.BLACK
+//        xAxis.enableGridDashedLine(8F,24F,0F)
+//
+//        val yLAxis = lineChart.axisLeft
+//        yLAxis.textColor = Color.BLACK
+//
+//        val yRAxis = lineChart.axisRight
+//        yRAxis.setDrawLabels(false)
+//        yRAxis.setDrawAxisLine(false)
+//        yRAxis.setDrawGridLines(false)
 
-
-
-
-        val xAxis = lineChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.textColor = Color.BLACK
-        xAxis.enableGridDashedLine(8F,24F,0F)
-
-        val yLAxis = lineChart.axisLeft
-        yLAxis.textColor = Color.BLACK
-
-        val yRAxis = lineChart.axisRight
-        yRAxis.setDrawLabels(false)
-        yRAxis.setDrawAxisLine(false)
-        yRAxis.setDrawGridLines(false)
-
-        val lineData = LineData(lineDataSet)
+        val lineData = LineData(dataSet)
         lineChart.data = lineData
+        lineChart.invalidate()
+    }
+    fun updateData(data : List<WaterTemperatureEntity>){
+        clearData()
+        data.forEach {
+            chartData.add(Entry(it.time,it.temperature))
+        }
+        val dataSet = LineDataSet(chartData, "수온")
+        lineChart.data = LineData(dataSet)
         lineChart.invalidate()
     }
 

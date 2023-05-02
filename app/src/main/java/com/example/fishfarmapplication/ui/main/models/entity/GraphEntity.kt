@@ -15,11 +15,3 @@ data class WaterTemperatureEntity (
     var id: Int = 0
 }
 
-@Entity(tableName = "Ph")
-data class PhEntity(
-    @ColumnInfo(name="time") val time:Float,
-    @ColumnInfo(name = "Ph") val ph:Float,
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id : Int = 0;
-}

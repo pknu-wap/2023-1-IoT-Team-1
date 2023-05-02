@@ -17,8 +17,6 @@ abstract class AppDatabase: RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): AppDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -27,7 +25,6 @@ abstract class AppDatabase: RoomDatabase() {
                 )   .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

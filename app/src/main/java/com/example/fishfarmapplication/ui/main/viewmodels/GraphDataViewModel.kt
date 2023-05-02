@@ -11,14 +11,18 @@ import kotlinx.coroutines.launch
 
 class GraphDataViewModel(application: Application) : AndroidViewModel(application) {
     val Repository: Repository = Repository(AppDatabase.getDatabase(application, viewModelScope))
-
     var allWaterTemperatures : LiveData<List<WaterTemperatureEntity>> = Repository.allWaterTemperatures
 
     fun insert(entity: WaterTemperatureEntity) = viewModelScope.launch (Dispatchers.IO){
         Repository.insert(entity)
     }
+
     fun deleteAllWaterTemperature() = viewModelScope.launch(Dispatchers.IO){
         Repository.deleteAllWaterTemperature()
+    }
+
+    fun getAllWaterTemperature() : List<WaterTemperatureEntity>? {
+        return allWaterTemperatures.value
     }
 
 

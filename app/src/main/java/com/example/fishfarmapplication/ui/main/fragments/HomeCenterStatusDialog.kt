@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.example.fishfarmapplication.databinding.FragmentDialogHomeCenterBinding
 import com.example.fishfarmapplication.databinding.FragmentHomeBinding
+import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 
 class HomeCenterStatusDialog : DialogFragment() {
 
     private var _binding: FragmentDialogHomeCenterBinding? = null
+
+    private val homeViewModel : HomeViewModel by activityViewModels()
 
     private val binding get() = _binding!!
 
@@ -30,6 +34,8 @@ class HomeCenterStatusDialog : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        homeViewModel.setWaterTemperatureStandard(20f)
+
         _binding = null
     }
 
