@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/navi_homeFragment"
         android:title="홈"
         android:icon="@drawable/ic_action_home"
         />
     <item
-        android:id="@+id/graphFragment"
+        android:id="@+id/navi_graphFragment"
         android:title="통계"
         android:icon="@drawable/ic_action_graph"
         />
     <item
-        android:id="@+id/LedFragment"
+        android:id="@+id/navi_LedFragment"
         android:title="LED"
         android:icon="@drawable/ic_action_led"
         />
     <item
-        android:id="@+id/medicineFragment"
+        android:id="@+id/navi_medicineFragment"
         android:title="약"
         android:icon="@drawable/ic_action_led"
         />
     <item
-        android:id="@+id/mypageFragment"
+        android:id="@+id/navi_mypageFragment"
         android:title="마이페이지"
         android:icon="@drawable/ic_action_my"
         />

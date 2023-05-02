@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -36,12 +37,26 @@ android {
         viewBinding true
     }
 
+    dataBinding{
+        enabled = true
+    }
+
 }
 
 dependencies {
+    def room_version = "2.5.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+
+
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.activity:activity-ktx:1.7.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -52,4 +67,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation platform('com.google.firebase:firebase-bom:31.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
+    implementation 'androidx.activity:activity-ktx:1.7.1'
 }
