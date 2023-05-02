@@ -24,25 +24,21 @@ class LedColorSelectListAdapter(val itemList: ArrayList<LedColorSelectListItem>)
         fun bind(position: Int) {
             button.setBackgroundResource(itemList[position].color)
             button.setOnClickListener {
-                Log.d("버튼", "클릭됐음")
                 when (position.toString()) {
                     "0" -> {
                         ledRef.child("R").setValue(0)
                         ledRef.child("G").setValue(255)
                         ledRef.child("B").setValue(0)
-                        Log.d("초록색", "클릭")
                     }
                     "1" -> {
                         ledRef.child("R").setValue(0)
                         ledRef.child("G").setValue(0)
                         ledRef.child("B").setValue(255)
-                        Log.d("파란색", "클릭")
                     }
                     "2" -> {
                         ledRef.child("R").setValue(255)
                         ledRef.child("G").setValue(0)
                         ledRef.child("B").setValue(0)
-                        Log.d("빨간색", "클릭")
                     }
                 }
             }

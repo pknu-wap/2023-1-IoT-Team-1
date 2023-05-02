@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class LedFragment : Fragment() {
-    var ledState: Int = 1
+    var ledState: Int = -1
     private val database =
         Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
     private val ledRef = database.getReference("led")
@@ -42,18 +42,23 @@ class LedFragment : Fragment() {
         binding.ledColorSelectScroll.adapter = itemAdapter
         binding.btnLed.setOnClickListener {
             setBtnText()
+            if (ledState > 0) {
+                ledRef.child("ledstate").setValue(true)
+            } else {
+                ledRef.child("ledstate").setValue(false)
+            }
         }
         return binding.root
 
     }
 
     fun setBtnText() {
-        binding.btnLed.text = if (ledState > 0) {
-            "LED ON"
-        } else {
-            "LED OFF"
-        }
         ledState *= -1
+        binding.btnLed.text = if (ledState > 0) {
+            "LED OFF"
+        } else {
+            "LED ON"
+        }
     }
 
 }
