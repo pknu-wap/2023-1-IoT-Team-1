@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         it.getValue(User::class.java)?.let { user ->
                             if(user.password == password) {
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.putExtra("id", id)
                                 startActivity(intent)
                             } else {
                                 Toast.makeText(this@LoginActivity, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show()
