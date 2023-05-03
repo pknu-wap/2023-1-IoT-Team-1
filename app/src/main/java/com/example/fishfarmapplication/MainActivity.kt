@@ -29,27 +29,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val viewModel: PageViewModel by viewModels()
     private val graphDataViewModel: GraphDataViewModel by viewModels()
+    private val idViewModel: IdViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val idval = intent.getStringExtra("id").toString()
         hideActionBar()
-
-        val idViewModel = ViewModelProvider(this)[IdViewModel::class.java]
-        val data = idViewModel.data
-
-        Log.d("뷰모델", data)
-
-        val id = intent.getStringExtra("id").toString()
-        val bundle = Bundle().apply {
-            putString("id", id)
-        }
-        val fragment = LedFragment().apply {
-            arguments = bundle
-        }
-
+        idViewModel.updateIdValue(idval)
+        Log.d("값 받기", idViewModel.getValue().toString())
 
         lifecycleScope.launch(Dispatchers.IO){
 //            graphDataViewModel.deleteAllWaterTemperature()
