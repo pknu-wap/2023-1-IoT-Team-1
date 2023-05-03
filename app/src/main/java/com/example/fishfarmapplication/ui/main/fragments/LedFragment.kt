@@ -46,7 +46,7 @@ class LedFragment : Fragment() {
         itemList.add(LedColorSelectListItem(R.color.led_select_blue))
         itemList.add(LedColorSelectListItem(R.color.led_select_red))
 
-        val itemAdapter = LedColorSelectListAdapter(itemList)
+        val itemAdapter = LedColorSelectListAdapter(itemList, id)
         itemAdapter.notifyDataSetChanged()
         binding.ledColorSelectScroll.adapter = itemAdapter
         binding.btnLed.setOnClickListener {
@@ -61,7 +61,7 @@ class LedFragment : Fragment() {
 
     }
 
-    fun setBtnText() {
+    private fun setBtnText() {
         ledState *= -1
         binding.btnLed.text = if (ledState > 0) {
             "LED OFF"
