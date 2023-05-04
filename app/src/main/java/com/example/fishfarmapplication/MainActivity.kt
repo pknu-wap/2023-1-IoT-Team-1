@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
@@ -11,6 +13,7 @@ import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
 import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
 import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val viewModel: PageViewModel by viewModels()
     private val graphDataViewModel: GraphDataViewModel by viewModels()
+    private val homeViewModel : HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +37,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         hideActionBar()
 
+
         lifecycleScope.launch(Dispatchers.IO){
 //            graphDataViewModel.deleteAllWaterTemperature()
 //            graphDataViewModel.insert(WaterTemperatureEntity(1F,2F))
 //            graphDataViewModel.insert(WaterTemperatureEntity(2F,4F))
 //            graphDataViewModel.insert(WaterTemperatureEntity(3F,5F))
         }
+
 
 
 
@@ -120,6 +126,8 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
     }
+
+
 
 
 

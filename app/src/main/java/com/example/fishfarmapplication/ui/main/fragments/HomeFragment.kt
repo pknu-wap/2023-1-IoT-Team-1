@@ -2,13 +2,13 @@ package com.example.fishfarmapplication.ui.main.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.*
 import androidx.lifecycle.Observer
+import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.FragmentHomeBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
@@ -30,10 +30,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
-        binding.viewModelXml= homeViewModel
-//        binding.lifecycleOwner = this
 
         val itemList = ArrayList<HomeListItem>()
         itemList.add(HomeListItem("수온","테스트"))
@@ -45,10 +43,20 @@ class HomeFragment : Fragment() {
         itemAdapter.notifyDataSetChanged()
         binding.homeRecyclerView.adapter = itemAdapter
         binding.homeRecyclerView.addItemDecoration(itemDeco)
-
         binding.homeCenterStatusLayout.setOnClickListener {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
         }
+
+
+        homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
+            binding.invalidateAll()
+        })
+
+
+        binding.viewModelXml= homeViewModel
+
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -59,6 +67,8 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
 
 
 

@@ -3,13 +3,11 @@ package com.example.fishfarmapplication.ui.main.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.fishfarmapplication.databinding.FragmentDialogHomeCenterBinding
-import com.example.fishfarmapplication.databinding.FragmentHomeBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 
 class HomeCenterStatusDialog : DialogFragment() {
@@ -20,6 +18,10 @@ class HomeCenterStatusDialog : DialogFragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var currentStandardData : currentStandardData
+
+    private lateinit var currentData: currentData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = true
@@ -27,6 +29,17 @@ class HomeCenterStatusDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FragmentDialogHomeCenterBinding.inflate(LayoutInflater.from(context))
+
+        currentStandardData = currentStandardData(homeViewModel.waterTemperatureStandard.value!!, homeViewModel.phStandard.value!!,
+            homeViewModel.foodStandard.value!!)
+
+        currentData = currentData(homeViewModel.waterTemperatureData.value!!, homeViewModel.phData.value!!,homeViewModel.foodData.value!!)
+
+
+        val sumbitBtn = binding.homeCenterStatusDialogSubmitButton
+        sumbitBtn.setOnClickListener{
+            dismiss()
+        }
         return AlertDialog.Builder(requireActivity())
             .setView(binding.root)
             .create()
@@ -34,8 +47,16 @@ class HomeCenterStatusDialog : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        homeViewModel.setWaterTemperatureStandard(20f)
+        val newWaterStandard = binding.homeCenterStatusDialogWaterTemperatureData.text.toString().toFloatOrNull() ?: currentStandardData.waterStandard
+        val newPhStandard = binding.homeCenterStatusDialogPHData.text.toString().toFloatOrNull() ?: currentStandardData.phStandard
+        val newFoodStandard = binding.homeCenterStatusDialogFoodData.text.toString().toFloatOrNull() ?: currentStandardData.foodStandard
+        Log.d("test", "test : " + newWaterStandard)
 
+        homeViewModel.setWaterTemperatureStandard(newWaterStandard)
+        homeViewModel.setPhStandard(newPhStandard)
+        homeViewModel.setFoodStandard(newFoodStandard)
+
+        checkStandard(newWaterStandard,newPhStandard,newFoodStandard)
         _binding = null
     }
 
@@ -43,4 +64,15 @@ class HomeCenterStatusDialog : DialogFragment() {
         const val TAG = "HomeCenterStatusDialog"
     }
 
+    fun checkStandard(newWaterStandard : Float, newPhStandard : Float, newFoodStandard : Float){
+        if(currentData.waterData != newWaterStandard || currentData.phData != newPhStandard
+            || currentData.foodData != newFoodStandard)
+            homeViewModel.setHomeStatusValue(false)
+        else
+            homeViewModel.setHomeStatusValue(true)
+    }
+
 }
+
+data class currentStandardData(var waterStandard: Float, var phStandard: Float, var foodStandard: Float)
+data class currentData(var waterData: Float, var phData: Float, var foodData: Float)

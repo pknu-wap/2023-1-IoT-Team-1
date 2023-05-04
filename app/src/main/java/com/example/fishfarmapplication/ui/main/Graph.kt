@@ -17,12 +17,15 @@ import java.util.concurrent.TimeUnit
 class Graph(val _chart: LineChart) {
     private var chartData = ArrayList<Entry>()
     private var lineChart = _chart;
+
+
     constructor(_chart: LineChart, _chartData: List<WaterTemperatureEntity>):this(_chart){
         this.lineChart = _chart;
         decoGraph()
         initData(_chartData)
     }
     init {
+
         decoGraph()
     }
 
