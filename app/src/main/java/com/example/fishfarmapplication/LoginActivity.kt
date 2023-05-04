@@ -3,23 +3,29 @@ package com.example.fishfarmapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.fishfarmapplication.databinding.ActivityLoginBinding
 import com.example.fishfarmapplication.ui.main.models.User
+import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import androidx.lifecycle.LiveData
+
 
 class LoginActivity : AppCompatActivity() {
 
-    val database = Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    val usersRef = database.getReference("users")
-
-    val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+    private val database =
+        Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    private val usersRef = database.getReference("users")
+    private lateinit var idViewModel: IdViewModel
+    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         binding.loginImageView.setOnClickListener { signin() }
     }
 
@@ -28,12 +34,14 @@ class LoginActivity : AppCompatActivity() {
             val id = editId.text.toString()
             val password = editPassword.text.toString()
 
-            if(id.isNotEmpty() && password.isNotEmpty()) {
+            if (id.isNotEmpty() && password.isNotEmpty()) {
                 usersRef.child(id).get().addOnSuccessListener {
-                    if(it.exists()) {
-                        Toast.makeText(this@LoginActivity,
+                    if (it.exists()) {
+                        Toast.makeText(
+                            this@LoginActivity,
                             "아이디가 존재합니다.",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_LONG
+                        )
                             .show()
                     } else {
                         val user = User(id, password)
@@ -42,9 +50,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this@LoginActivity,
+                Toast.makeText(
+                    this@LoginActivity,
                     "아이디, 비밀번호를 모두 입력해야 합니다.",
-                    Toast.LENGTH_LONG)
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
         }
@@ -54,16 +64,17 @@ class LoginActivity : AppCompatActivity() {
         with(binding) {
             val id = editId.text.toString()
             val password = editPassword.text.toString()
-
-            if(id.isNotEmpty() && password.isNotEmpty()) {
+            if (id.isNotEmpty() && password.isNotEmpty()) {
                 usersRef.child(id).get().addOnSuccessListener {
-                    if(it.exists()) {
+                    if (it.exists()) {
                         it.getValue(User::class.java)?.let { user ->
-                            if(user.password == password) {
+                            if (user.password == password) {
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.putExtra("id", id)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(this@LoginActivity, "비밀번호가 다릅니다.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@LoginActivity, "비밀번호가 다릅니다.", Toast.LENGTH_LONG)
+                                    .show()
                             }
                         }
                     } else {
@@ -71,9 +82,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this@LoginActivity,
+                Toast.makeText(
+                    this@LoginActivity,
                     "아이디, 비밀번호를  입력해야 합니다.",
-                    Toast.LENGTH_LONG)
+                    Toast.LENGTH_LONG
+                )
                     .show()
             }
         }

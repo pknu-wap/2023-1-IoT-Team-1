@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fishfarmapplication.R
+import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class LedColorSelectListAdapter(val itemList: ArrayList<LedColorSelectListItem>) :
+class LedColorSelectListAdapter(val itemList: ArrayList<LedColorSelectListItem>, val id: String) :
     RecyclerView.Adapter<LedColorSelectListAdapter.LedColorSelectListViewHolder>() {
-
     private val database =
         Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    private val ledRef = database.getReference("led")
+    private val ledRef = database.getReference("users").child(id).child("led")
 
     inner class LedColorSelectListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val button: Button = itemView.findViewById<Button>(R.id.ledColorSelectButton)
