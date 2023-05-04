@@ -30,6 +30,8 @@ class HomeCenterStatusDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FragmentDialogHomeCenterBinding.inflate(LayoutInflater.from(context))
 
+        binding.viewModelXml = homeViewModel
+
         currentStandardData = currentStandardData(homeViewModel.waterTemperatureStandard.value!!, homeViewModel.phStandard.value!!,
             homeViewModel.foodStandard.value!!)
 
