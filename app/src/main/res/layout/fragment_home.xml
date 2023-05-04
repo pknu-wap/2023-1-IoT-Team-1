@@ -202,7 +202,7 @@
                             android:text="수온"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"/>
+                            android:textColor="@{viewModelXml.waterTemperatureStatus ? @color/data_skyblue : @color/red_bad}"/>
 
                         <TextView
                             android:id="@+id/homeWaterTemperatureData"
@@ -214,7 +214,7 @@
                             android:text="@{String.valueOf(viewModelXml.waterTemperatureData)}"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"/>
+                            android:textColor="@{viewModelXml.waterTemperatureStatus ? @color/data_skyblue : @color/red_bad}"/>
 
                         <TextView
                             android:id="@+id/homeWaterTemperatureStandard"
@@ -249,7 +249,7 @@
                             android:text="PH"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"/>
+                            android:textColor="@{viewModelXml.phStatus ? @color/data_skyblue : @color/red_bad}"/>
 
                         <TextView
                             android:id="@+id/homePhData"
@@ -261,7 +261,7 @@
                             android:text="@{String.valueOf(viewModelXml.phData)}"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"
+                            android:textColor="@{viewModelXml.phStatus ? @color/data_skyblue : @color/red_bad}"
                             />
 
                         <TextView
@@ -299,7 +299,7 @@
                             android:text="먹이"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"
+                            android:textColor="@{viewModelXml.foodStatus ? @color/data_skyblue : @color/red_bad}"
                             />
 
                         <TextView
@@ -312,7 +312,7 @@
                             android:text="@{String.valueOf(viewModelXml.foodData)}"
                             android:textAlignment="center"
                             android:textSize="25dp"
-                            android:textColor="@color/data_skyblue"
+                            android:textColor="@{viewModelXml.foodStatus ? @color/data_skyblue : @color/red_bad}"
                             />
 
                         <TextView

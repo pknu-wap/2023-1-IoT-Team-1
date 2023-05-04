@@ -47,11 +47,9 @@ class HomeFragment : Fragment() {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
         }
 
-
         homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
             binding.invalidateAll()
         })
-
 
         binding.viewModelXml= homeViewModel
 

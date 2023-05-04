@@ -27,6 +27,14 @@ class HomeViewModel : ViewModel(){
     val phData : LiveData<Float> get() = _phData
     val foodData : LiveData<Float> get() = _foodData
 
+    private var _waterTemperatureStatus = MutableLiveData<Boolean>()
+    private var _phStatus = MutableLiveData<Boolean>()
+    private var _foodStatus = MutableLiveData<Boolean>()
+
+    val waterTemperatureStatus :LiveData<Boolean> get() = _waterTemperatureStatus
+    val phStatus : LiveData<Boolean> get() = _phStatus
+    val foodStatus : LiveData<Boolean> get() = _foodStatus
+
     init {
         _homeStatus.value = true
 
@@ -37,6 +45,11 @@ class HomeViewModel : ViewModel(){
         _waterTemperatureData.value = 10F
         _phData.value = 10F
         _foodData.value = 4F
+
+        _waterTemperatureStatus.value = if(waterTemperatureStandard.value == waterTemperatureData.value) true else false
+        _foodStatus.value = if(foodStandard.value == foodData.value) true else false
+        _phStatus.value = if(phStandard.value == phData.value) true else false
+
     }
     fun setHomeStatusValue(boolean: Boolean){
         _homeStatus.value = boolean
@@ -44,10 +57,6 @@ class HomeViewModel : ViewModel(){
 
     fun getHomeStatusValue() : Boolean?{
         return homeStatus.value
-    }
-
-    fun getWaterSandard() : Float?{
-        return waterTemperatureStandard.value
     }
 
     fun setWaterTemperatureStandard(float : Float){
@@ -73,6 +82,20 @@ class HomeViewModel : ViewModel(){
     fun setFoodData(float: Float){
         _foodData.value = float
     }
+
+    fun setWaterTemperatureStatus(boolean: Boolean){
+        _waterTemperatureStatus.value = boolean
+    }
+
+    fun setPhStatus(boolean: Boolean){
+        _phStatus.value = boolean
+    }
+
+    fun setFoodStatus(boolean: Boolean){
+        _foodStatus.value = boolean
+    }
+
+
 
 
 

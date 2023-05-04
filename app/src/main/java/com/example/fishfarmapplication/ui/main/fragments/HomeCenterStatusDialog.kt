@@ -65,11 +65,27 @@ class HomeCenterStatusDialog : DialogFragment() {
     }
 
     fun checkStandard(newWaterStandard : Float, newPhStandard : Float, newFoodStandard : Float){
-        if(currentData.waterData != newWaterStandard || currentData.phData != newPhStandard
-            || currentData.foodData != newFoodStandard)
-            homeViewModel.setHomeStatusValue(false)
+        if(currentData.waterData != newWaterStandard){
+            homeViewModel.setWaterTemperatureStatus(false)
+        } else
+            homeViewModel.setWaterTemperatureStatus(true)
+
+        if(currentData.phData != newPhStandard){
+            homeViewModel.setPhStatus(false)
+        }else
+            homeViewModel.setPhStatus(true)
+
+        if(currentData.foodData != newFoodStandard)
+            homeViewModel.setFoodStatus(false)
         else
+            homeViewModel.setFoodStatus(true)
+
+
+        if(homeViewModel.waterTemperatureStatus.value!! && homeViewModel.phStatus.value!!
+            && homeViewModel.foodStatus.value!!)
             homeViewModel.setHomeStatusValue(true)
+        else
+            homeViewModel.setHomeStatusValue(false)
     }
 
 }
