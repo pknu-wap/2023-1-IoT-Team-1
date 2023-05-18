@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.IO){
 //            graphDataViewModel.deleteAllWaterTemperature()
-//            graphDataViewModel.insertAll(GraphEntity(1.5F,2F,3F,4F))
-//            graphDataViewModel.insertAll(GraphEntity(2F,3F,1F,2F))
-//            graphDataViewModel.insertAll(GraphEntity(3F,1F,4f,3F))
+//            graphDataViewModel.insertAll(GraphEntity(20230518F,2F,3F,4F))
+//            graphDataViewModel.insertAll(GraphEntity(20230521F,3F,1F,2F))
+//            graphDataViewModel.insertAll(GraphEntity(20230520F,1F,4f,3F))
         }
 
 

@@ -58,8 +58,6 @@ class HomeFragment : Fragment() {
 
         binding.viewModelXml= homeViewModel
 
-        binding.lifecycleOwner = this
-
         return binding.root
     }
 

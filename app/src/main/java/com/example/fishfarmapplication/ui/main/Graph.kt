@@ -10,6 +10,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
@@ -20,68 +21,80 @@ class Graph(val _chart: LineChart) {
     private var lineChart = _chart;
 
 
-    constructor(_chart: LineChart, _chartData: List<WaterTemperatureTuple>):this(_chart){
-        this.lineChart = _chart;
+    constructor(_chart: LineChart, _chartData: List<WaterTemperatureTuple>) : this(_chart) {
+        this.lineChart = _chart
+        initGraph(_chartData)
+    }
+
+    init {
+        decoGraph()
+    }
+
+    fun initGraph(_chartData: List<WaterTemperatureTuple>){
         decoGraph()
         initData(_chartData)
     }
-    init {
 
-        decoGraph()
-    }
+    fun decoGraph() {
+        lineChart.apply {
+            axisRight.isEnabled = false
+            axisLeft.axisMaximum = 10f
+            legend.apply {
+                textSize = 15f
+                verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                orientation = Legend.LegendOrientation.HORIZONTAL
+                setDrawInside(false)
+            }
 
-    fun decoGraph(){
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                textSize = 10f
+                setDrawGridLines(false)
+                granularity = 1f
+//            axisMinimum = 2f
+                isGranularityEnabled = true
+
+                valueFormatter = object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        val time = value.toInt()
+                        return "${(time / 10000).toString().padStart(2, '0')}." +
+                                "${((time % 10000) / 100).toString().padStart(2, '0')}." +
+                                "${(time % 100).toString().padStart(2, '0')}"
+                    }
+                }
+
+            }
+
+//            isDoubleTapToZoomEnabled = false
+//            setPinchZoom(false)
+//            description.text = "시간 별 수온"
+//            description.textSize = 15f
+
+        }
+
+
         //차트의 범례 설정
-        val legend = lineChart.legend
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        legend.form = Legend.LegendForm.CIRCLE
-        legend.formSize = 10f
-        legend.textSize = 13f
-        legend.textColor = Color.parseColor("#A3A3A3")
-        legend.orientation = Legend.LegendOrientation.VERTICAL
-        legend.setDrawInside(false)
-        legend.yEntrySpace = 5f
-        legend.isWordWrapEnabled = true
-        legend.xOffset = 80f
-        legend.yOffset = 20f
-        legend.calculatedLineSizes
+//        val legend = lineChart.legend
+//        legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+//        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+//        legend.form = Legend.LegendForm.CIRCLE
+//        legend.formSize = 10f
+//        legend.textSize = 13f
+//        legend.textColor = Color.parseColor("#A3A3A3")
+//        legend.orientation = Legend.LegendOrientation.VERTICAL
+//        legend.setDrawInside(false)
+//        legend.yEntrySpace = 5f
+//        legend.isWordWrapEnabled = true
+//        legend.xOffset = 80f
+//        legend.yOffset = 20f
+//        legend.calculatedLineSizes
 
-        //XAxis 설정 (아래쪽)
-        val xAxis = lineChart.xAxis
-        xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(false)
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-
-        xAxis.granularity = 1f
-        xAxis.textSize = 14f
-        xAxis.textColor = Color.rgb(118, 118, 118)
-        xAxis.spaceMin = 0.1f
-        xAxis.spaceMax = 0.1f
-
-        xAxis.valueFormatter = TimeAxisValueFormat()
-
-        // YAxis(Right) (왼쪽) - 선 유무, 데이터 최솟값/최댓값, 색상
-        val yAxisLeft = lineChart.axisLeft
-        yAxisLeft.textSize = 14f
-        yAxisLeft.textColor = Color.rgb(163, 163, 163)
-        yAxisLeft.setDrawAxisLine(false)
-        yAxisLeft.axisLineWidth = 2f
-        yAxisLeft.axisMinimum = 0f // 최솟값
-
-        // YAxis(Left) (오른쪽) - 선 유무, 데이터 최솟값/최댓값, 색상
-        val yAxis = lineChart.axisRight
-        yAxis.setDrawLabels(false) // label 삭제
-
-        yAxis.textColor = Color.rgb(163, 163, 163)
-        yAxis.setDrawAxisLine(false)
-        yAxis.axisLineWidth = 2f
-        yAxis.axisMinimum = 0f // 최솟값
     }
 
-    fun initData(data :List<WaterTemperatureTuple>){
+    fun initData(data: List<WaterTemperatureTuple>) {
         data.forEach {
-            chartData.add(Entry(it.time,it.temperature))
+            chartData.add(Entry(it.time, it.temperature))
         }
 
         val dataSet = LineDataSet(chartData, "수온")
@@ -90,50 +103,29 @@ class Graph(val _chart: LineChart) {
         dataSet.setDrawCircleHole(true)
         dataSet.setDrawCircles(true)
 
-//        val xAxis = lineChart.xAxis
-//        xAxis.position = XAxis.XAxisPosition.BOTTOM
-//        xAxis.textColor = Color.BLACK
-//        xAxis.enableGridDashedLine(8F,24F,0F)
-//
-//        val yLAxis = lineChart.axisLeft
-//        yLAxis.textColor = Color.BLACK
-//
-//        val yRAxis = lineChart.axisRight
-//        yRAxis.setDrawLabels(false)
-//        yRAxis.setDrawAxisLine(false)
-//        yRAxis.setDrawGridLines(false)
-
         val lineData = LineData(dataSet)
         lineChart.data = lineData
         lineChart.invalidate()
     }
-    fun updateData(data : List<WaterTemperatureTuple>){
+
+    fun updateData(data: List<WaterTemperatureTuple>) {
         clearData()
         data.forEach {
-            chartData.add(Entry(it.time,it.temperature))
+            chartData.add(Entry(it.time, it.temperature))
         }
         val dataSet = LineDataSet(chartData, "수온")
         lineChart.data = LineData(dataSet)
+        lineChart.data.notifyDataChanged()
         lineChart.invalidate()
     }
 
-    fun getChart() : LineChart{
+    fun getChart(): LineChart {
         return lineChart;
     }
 
-    fun clearData(){
+    fun clearData() {
         chartData.clear()
     }
 
 
-
-}
-
-class TimeAxisValueFormat: IndexAxisValueFormatter(){
-    override fun getFormattedValue(value: Float): String {
-        var valueToMinutes = TimeUnit.DAYS.toDays(value.toLong())
-        var date = Date(valueToMinutes)
-        var formatDate = SimpleDateFormat("MM:dd")
-        return formatDate.format(date)
-    }
 }

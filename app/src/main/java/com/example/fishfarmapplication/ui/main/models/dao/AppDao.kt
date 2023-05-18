@@ -15,7 +15,7 @@ interface AppDao {
 //    @Query("select * from Ph")
 //    fun getAllPh() : LiveData<List<PhEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(entity: GraphEntity)
 
 
