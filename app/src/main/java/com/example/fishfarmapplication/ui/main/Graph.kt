@@ -1,7 +1,8 @@
 package com.example.fishfarmapplication.ui.main
 
 import android.graphics.Color
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
+import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureTuple
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -19,7 +20,7 @@ class Graph(val _chart: LineChart) {
     private var lineChart = _chart;
 
 
-    constructor(_chart: LineChart, _chartData: List<WaterTemperatureEntity>):this(_chart){
+    constructor(_chart: LineChart, _chartData: List<WaterTemperatureTuple>):this(_chart){
         this.lineChart = _chart;
         decoGraph()
         initData(_chartData)
@@ -78,7 +79,7 @@ class Graph(val _chart: LineChart) {
         yAxis.axisMinimum = 0f // 최솟값
     }
 
-    fun initData(data :List<WaterTemperatureEntity>){
+    fun initData(data :List<WaterTemperatureTuple>){
         data.forEach {
             chartData.add(Entry(it.time,it.temperature))
         }
@@ -106,7 +107,7 @@ class Graph(val _chart: LineChart) {
         lineChart.data = lineData
         lineChart.invalidate()
     }
-    fun updateData(data : List<WaterTemperatureEntity>){
+    fun updateData(data : List<WaterTemperatureTuple>){
         clearData()
         data.forEach {
             chartData.add(Entry(it.time,it.temperature))

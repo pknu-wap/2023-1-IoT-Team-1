@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
 import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 import kotlinx.coroutines.Dispatchers
@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.IO){
 //            graphDataViewModel.deleteAllWaterTemperature()
-//            graphDataViewModel.insert(WaterTemperatureEntity(1F,2F))
-//            graphDataViewModel.insert(WaterTemperatureEntity(2F,4F))
-//            graphDataViewModel.insert(WaterTemperatureEntity(3F,5F))
+//            graphDataViewModel.insertAll(GraphEntity(1.5F,2F,3F,4F))
+//            graphDataViewModel.insertAll(GraphEntity(2F,3F,1F,2F))
+//            graphDataViewModel.insertAll(GraphEntity(3F,1F,4f,3F))
         }
 
 

@@ -32,11 +32,16 @@ class HomeFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
-
         val itemList = ArrayList<HomeListItem>()
-        itemList.add(HomeListItem("수온","테스트"))
-        itemList.add(HomeListItem("PH","테스트"))
-        itemList.add(HomeListItem("먹이","테스트"))
+        val waterData = homeViewModel.waterTemperatureData
+        val phData = homeViewModel.phData
+
+        val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
+        homeViewModel.foodData.value!!)
+
+        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString()))
+        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString()))
+        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString()))
 
         val itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)

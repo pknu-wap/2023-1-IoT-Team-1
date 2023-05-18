@@ -82,7 +82,6 @@ class HomeCenterStatusDialog : DialogFragment() {
         else
             homeViewModel.setFoodStatus(true)
 
-
         if(homeViewModel.waterTemperatureStatus.value!! && homeViewModel.phStatus.value!!
             && homeViewModel.foodStatus.value!!)
             homeViewModel.setHomeStatusValue(true)

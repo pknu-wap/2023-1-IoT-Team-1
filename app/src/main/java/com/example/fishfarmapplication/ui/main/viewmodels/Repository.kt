@@ -2,12 +2,13 @@ package com.example.fishfarmapplication.ui.main.viewmodels
 
 import androidx.lifecycle.LiveData
 import com.example.fishfarmapplication.ui.main.models.databases.AppDatabase
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
+import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureTuple
 
 class Repository(mDatabase: AppDatabase) {
     private val dao = mDatabase.dao()
 
-    val allWaterTemperatures : LiveData<List<WaterTemperatureEntity>> = dao.getAllWaterTemperature()
+    val allWaterTemperatures : LiveData<List<WaterTemperatureTuple>> = dao.getAllWaterTemperature()
 
     companion object{
         private var sInstance : Repository? = null
@@ -21,15 +22,15 @@ class Repository(mDatabase: AppDatabase) {
         }
     }
     
-    suspend fun insert(entity: WaterTemperatureEntity){
-        dao.insert(entity)
+    suspend fun insert(entity: GraphEntity){
+        dao.insertAll(entity)
     }
 
-    suspend fun deleteWaterTemperature(entity: WaterTemperatureEntity){
+    suspend fun deleteWaterTemperature(entity: GraphEntity){
 
     }
-    suspend fun deleteAllWaterTemperature(){
-        dao.deleteAllWaterTemperature()
+    suspend fun deleteAll(){
+        dao.deleteAll()
     }
 
 }
