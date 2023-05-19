@@ -1,6 +1,5 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
-import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -65,11 +63,4 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-
-
-
-
-
-
 }
