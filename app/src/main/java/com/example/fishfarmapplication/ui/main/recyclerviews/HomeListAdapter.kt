@@ -1,5 +1,6 @@
 package com.example.fishfarmapplication.ui.main.recyclerviews
 
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.ItemHomeRecyclerViewBinding
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.logging.Handler
 
 class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
     RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
@@ -27,7 +29,11 @@ class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
             titleView.text = itemList[position].title
             DataView.text = itemList[position].data
             button.setOnClickListener {
-                foodRef.child("state").setValue(0)
+                foodRef.child("state").setValue(1)
+
+                android.os.Handler(Looper.getMainLooper()).postDelayed({
+                    foodRef.child("state").setValue(0)
+                }, 1000)
             }
         }
     }
@@ -47,8 +53,6 @@ class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
     override fun getItemCount(): Int {
         return itemList.count()
     }
-
-
 }
 
 data class HomeListItem(val title: String, val data: String);
