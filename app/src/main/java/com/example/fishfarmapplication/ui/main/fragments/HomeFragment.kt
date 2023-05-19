@@ -1,6 +1,5 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,16 +13,19 @@ import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
-import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 
 class HomeFragment : Fragment() {
 
+    private lateinit var id: String
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val idViewModel: IdViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        id = idViewModel.getValue().toString()
     }
 
     override fun onCreateView(
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
         itemList.add(HomeListItem("PH","테스트"))
         itemList.add(HomeListItem("먹이","테스트"))
 
-        val itemAdapter = HomeListAdapter(itemList)
+        val itemAdapter = HomeListAdapter(itemList, id)
         val itemDeco = HomeListDeco(30)
         itemAdapter.notifyDataSetChanged()
         binding.homeRecyclerView.adapter = itemAdapter
@@ -65,11 +67,4 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-
-
-
-
-
-
 }
