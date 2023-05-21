@@ -3,12 +3,15 @@ package com.example.fishfarmapplication.ui.main.viewmodels
 import androidx.lifecycle.LiveData
 import com.example.fishfarmapplication.ui.main.models.databases.AppDatabase
 import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
+import com.example.fishfarmapplication.ui.main.models.entity.PhTuple
 import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureTuple
 
 class Repository(mDatabase: AppDatabase) {
     private val dao = mDatabase.dao()
 
     val allWaterTemperatures : LiveData<List<WaterTemperatureTuple>> = dao.getAllWaterTemperature()
+
+    val allPh : LiveData<List<PhTuple>> = dao.getAllPh()
 
     companion object{
         private var sInstance : Repository? = null

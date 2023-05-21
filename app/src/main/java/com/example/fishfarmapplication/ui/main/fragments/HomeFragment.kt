@@ -22,6 +22,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,18 +42,31 @@ class HomeFragment : Fragment() {
         val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
         homeViewModel.foodData.value!!)
 
-        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString()))
-        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString()))
-        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString()))
+        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString(), homeViewModel.waterTemperatureStatus.value!!))
+        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
+        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
         val itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)
+
         itemAdapter.notifyDataSetChanged()
         binding.homeRecyclerView.adapter = itemAdapter
         binding.homeRecyclerView.addItemDecoration(itemDeco)
         binding.homeCenterStatusLayout.setOnClickListener {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
+
         }
+        homeViewModel.phData.observe(viewLifecycleOwner, Observer {
+            updateHomeList(itemAdapter)
+        })
+
+        homeViewModel.waterTemperatureData.observe(viewLifecycleOwner, Observer {
+            updateHomeList(itemAdapter)
+        })
+
+        homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
+            updateHomeList(itemAdapter)
+        })
 
         homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
             binding.invalidateAll()
@@ -61,13 +77,16 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    companion object{
-        fun newInstance(title:String) = HomeFragment().apply {
-            arguments = Bundle().apply {
-                putString("title", title)
-            }
-        }
+    fun updateHomeList(itemAdapter: HomeListAdapter){
+        itemAdapter.updateWaterData(homeViewModel.waterTemperatureData.value!!, homeViewModel.waterTemperatureStatus.value!!)
+        itemAdapter.updatePhData(homeViewModel.phData.value!!,homeViewModel.phStatus.value!!)
+        itemAdapter.updateFoodData(homeViewModel.foodData.value!!,homeViewModel.foodStatus.value!!)
+        itemAdapter.notifyDataSetChanged()
     }
+
+
+
+
 
 
 

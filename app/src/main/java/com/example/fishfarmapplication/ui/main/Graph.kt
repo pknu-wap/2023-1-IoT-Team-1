@@ -2,6 +2,7 @@ package com.example.fishfarmapplication.ui.main
 
 import android.graphics.Color
 import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
+import com.example.fishfarmapplication.ui.main.models.entity.PhTuple
 import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureTuple
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
@@ -18,19 +19,39 @@ import java.util.concurrent.TimeUnit
 
 class Graph(val _chart: LineChart) {
     private var chartData = ArrayList<Entry>()
-    private var lineChart = _chart;
-
-
-    constructor(_chart: LineChart, _chartData: List<WaterTemperatureTuple>) : this(_chart) {
-        this.lineChart = _chart
-        initGraph(_chartData)
-    }
+    private var lineChart = _chart
 
     init {
+        this.lineChart = _chart
         decoGraph()
     }
 
-    fun initGraph(_chartData: List<WaterTemperatureTuple>){
+    constructor(_chart: LineChart, chartDataTuple: List<ChartDataTuple>) : this(_chart){
+        this.lineChart = _chart
+        initGraph(chartDataTuple)
+    }
+
+
+
+    companion object{
+        fun of(_chart: LineChart, _chartData: List<WaterTemperatureTuple>) : Graph{
+            val temp = ArrayList<ChartDataTuple>()
+            _chartData.forEach{
+                temp.add(ChartDataTuple(it.time,it.temperature))
+            }
+            return Graph(_chart, temp)
+        }
+        fun from(_chart: LineChart, _chartData:List<PhTuple>) : Graph{
+            val temp = ArrayList<ChartDataTuple>()
+            _chartData.forEach{
+                temp.add(ChartDataTuple(it.time,it.phData))
+            }
+            return Graph(_chart, temp)
+        }
+    }
+
+
+    fun initGraph(_chartData: List<ChartDataTuple>){
         decoGraph()
         initData(_chartData)
     }
@@ -92,9 +113,9 @@ class Graph(val _chart: LineChart) {
 
     }
 
-    fun initData(data: List<WaterTemperatureTuple>) {
+    fun initData(data: List<ChartDataTuple>) {
         data.forEach {
-            chartData.add(Entry(it.time, it.temperature))
+            chartData.add(Entry(it.time, it.data))
         }
 
         val dataSet = LineDataSet(chartData, "수온")
@@ -126,6 +147,8 @@ class Graph(val _chart: LineChart) {
     fun clearData() {
         chartData.clear()
     }
+
+    data class ChartDataTuple(val time:Float, val data:Float)
 
 
 }
