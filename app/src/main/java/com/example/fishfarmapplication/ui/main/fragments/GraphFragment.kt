@@ -22,7 +22,7 @@ class GraphFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGraphBinding.inflate(inflater, container, false)
-        val chartWaterData = graphDataViewModel.getAllWaterTemperature()
+        val chartWaterData = graphDataViewModel.allWaterTemperatures.value
         val phData = graphDataViewModel.getAllPh()
         if (chartWaterData != null)
             waterChart = Graph.of(binding.waterChart, chartWaterData)

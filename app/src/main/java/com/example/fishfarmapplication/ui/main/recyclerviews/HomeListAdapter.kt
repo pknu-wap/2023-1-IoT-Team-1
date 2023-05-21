@@ -1,5 +1,6 @@
 package com.example.fishfarmapplication.ui.main.recyclerviews
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,14 +21,12 @@ class HomeListAdapter (val itemList: ArrayList<HomeListItem>)
             titleView.text= itemList[position].title
             DataView.text=itemList[position].data
             if(itemList[position].status){
-                titleView.setTextColor(R.color.data_skyblue.toInt())
-                DataView.setTextColor(R.color.data_skyblue.toInt())
-            } else{
-                titleView.setTextColor(R.color.red_bad.toInt())
-                DataView.setTextColor(R.color.red_bad.toInt())
+                titleView.setTextColor(Color.parseColor("#74D6EA"))
+                DataView.setTextColor(Color.parseColor("#74D6EA"))
+            } else {
+                titleView.setTextColor(Color.parseColor("#F06C83"))
+                DataView.setTextColor(Color.parseColor("#F06C83"))
             }
-
-
         }
     }
 
@@ -57,6 +56,10 @@ class HomeListAdapter (val itemList: ArrayList<HomeListItem>)
     fun updateFoodData(float: Float,_status: Boolean){
         itemList[2].data = float.toString()
         itemList[2].status = _status
+    }
+
+    private fun checkStatus(boolean: Boolean) : Boolean {
+        return true
     }
 
 

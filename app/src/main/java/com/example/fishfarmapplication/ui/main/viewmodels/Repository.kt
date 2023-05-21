@@ -13,6 +13,8 @@ class Repository(mDatabase: AppDatabase) {
 
     val allPh : LiveData<List<PhTuple>> = dao.getAllPh()
 
+    val recentWaterTemperature : LiveData<Float> = dao.getRecentWaterTemperature()
+
     companion object{
         private var sInstance : Repository? = null
         fun getInstance(database: AppDatabase) : Repository{

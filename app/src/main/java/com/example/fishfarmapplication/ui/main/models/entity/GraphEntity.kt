@@ -28,6 +28,5 @@ data class WaterTemperatureTuple(
 data class PhTuple(
     @ColumnInfo(name="time") val time: Float,
     @ColumnInfo(name = "ph") val phData: Float
-
 )
 

@@ -13,6 +13,9 @@ interface AppDao {
     @Query("select time,watertemperature from GraphData order by time asc")
     fun getAllWaterTemperature() : LiveData<List<WaterTemperatureTuple>>
 
+    @Query("select g.watertemperature from GraphData g where g.time = (select max(time) from GraphData)")
+    fun getRecentWaterTemperature() : LiveData<Float>
+
     @Query("select time,ph from GraphData order by time asc")
     fun getAllPh() : LiveData<List<PhTuple>>
 

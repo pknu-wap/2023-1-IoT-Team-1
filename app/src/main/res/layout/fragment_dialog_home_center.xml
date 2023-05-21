@@ -57,7 +57,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textAlignment="center"
-                    android:text="@{String.valueOf(viewModelXml.waterTemperatureStandard)}"/>
+                    android:text="@{String.valueOf(viewModelXml.standard.waterTemperature)}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,7 +86,7 @@
                     android:inputType="numberSigned"
                     android:maxLength="2"
                     android:textAlignment="center"
-                    android:text="@{String.valueOf(viewModelXml.phStandard)}"/>
+                    android:text="@{String.valueOf(viewModelXml.standard.ph)}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -115,7 +115,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textAlignment="center"
-                    android:text="@{String.valueOf(viewModelXml.foodStandard)}"/>
+                    android:text="@{String.valueOf(viewModelXml.standard.food)}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

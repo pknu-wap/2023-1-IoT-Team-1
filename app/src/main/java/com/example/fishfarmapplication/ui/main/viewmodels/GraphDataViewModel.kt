@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class GraphDataViewModel(application: Application) : AndroidViewModel(application) {
     val Repository: Repository = Repository(AppDatabase.getDatabase(application, viewModelScope))
-    var allWaterTemperatures : LiveData<List<WaterTemperatureTuple>> = Repository.allWaterTemperatures
+    val allWaterTemperatures : LiveData<List<WaterTemperatureTuple>> = Repository.allWaterTemperatures
+    val recentWaterTemperature : LiveData<Float> = Repository.recentWaterTemperature
 
     val allPh : LiveData<List<PhTuple>> = Repository.allPh
 
@@ -25,9 +26,6 @@ class GraphDataViewModel(application: Application) : AndroidViewModel(applicatio
         Repository.deleteAll()
     }
 
-    fun getAllWaterTemperature() : List<WaterTemperatureTuple>? {
-        return allWaterTemperatures.value
-    }
 
     fun getAllPh() : List<PhTuple>?{
         return allPh.value

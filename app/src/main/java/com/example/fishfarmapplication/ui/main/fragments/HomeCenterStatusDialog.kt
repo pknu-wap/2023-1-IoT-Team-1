@@ -32,8 +32,8 @@ class HomeCenterStatusDialog : DialogFragment() {
 
         binding.viewModelXml = homeViewModel
 
-        currentStandardData = currentStandardData(homeViewModel.waterTemperatureStandard.value!!, homeViewModel.phStandard.value!!,
-            homeViewModel.foodStandard.value!!)
+        currentStandardData = currentStandardData(homeViewModel.standard.value!!.waterTemperature, homeViewModel.standard.value!!.ph,
+            homeViewModel.standard.value!!.food)
 
         currentData = currentData(homeViewModel.waterTemperatureData.value!!, homeViewModel.phData.value!!,homeViewModel.foodData.value!!)
 

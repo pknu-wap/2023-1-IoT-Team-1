@@ -2,6 +2,7 @@ package com.example.fishfarmapplication.ui.main.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +24,13 @@ class HomeFragment : Fragment() {
     private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-
+    private lateinit var itemAdapter : HomeListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,8 @@ class HomeFragment : Fragment() {
         val waterData = homeViewModel.waterTemperatureData
         val phData = homeViewModel.phData
 
+        checkData()
+
         val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
         homeViewModel.foodData.value!!)
 
@@ -46,7 +51,7 @@ class HomeFragment : Fragment() {
         itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
         itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
-        val itemAdapter = HomeListAdapter(itemList)
+        itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)
 
         itemAdapter.notifyDataSetChanged()
@@ -56,19 +61,29 @@ class HomeFragment : Fragment() {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
 
         }
+
         homeViewModel.phData.observe(viewLifecycleOwner, Observer {
             updateHomeList(itemAdapter)
+            binding.invalidateAll()
         })
 
         homeViewModel.waterTemperatureData.observe(viewLifecycleOwner, Observer {
             updateHomeList(itemAdapter)
+            binding.invalidateAll()
         })
 
         homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
             updateHomeList(itemAdapter)
+            binding.invalidateAll()
         })
 
         homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
+            binding.invalidateAll()
+        })
+
+        homeViewModel.standard.observe(viewLifecycleOwner, Observer {
+            checkData()
+            updateHomeList(itemAdapter)
             binding.invalidateAll()
         })
 
@@ -78,10 +93,34 @@ class HomeFragment : Fragment() {
     }
 
     fun updateHomeList(itemAdapter: HomeListAdapter){
+        Log.d("test", "update home list")
         itemAdapter.updateWaterData(homeViewModel.waterTemperatureData.value!!, homeViewModel.waterTemperatureStatus.value!!)
         itemAdapter.updatePhData(homeViewModel.phData.value!!,homeViewModel.phStatus.value!!)
         itemAdapter.updateFoodData(homeViewModel.foodData.value!!,homeViewModel.foodStatus.value!!)
         itemAdapter.notifyDataSetChanged()
+    }
+
+    fun checkData(){
+        if(homeViewModel.waterTemperatureData.value != homeViewModel.standard.value!!.waterTemperature){
+            homeViewModel.setWaterTemperatureStatus(false)
+        } else
+            homeViewModel.setWaterTemperatureStatus(true)
+
+        if(homeViewModel.phData.value != homeViewModel.standard.value!!.ph){
+            homeViewModel.setPhStatus(false)
+        }else
+            homeViewModel.setPhStatus(true)
+
+        if(homeViewModel.foodData.value != homeViewModel.standard.value!!.food)
+            homeViewModel.setFoodStatus(false)
+        else
+            homeViewModel.setFoodStatus(true)
+
+        if(homeViewModel.waterTemperatureStatus.value!! && homeViewModel.phStatus.value!!
+            && homeViewModel.foodStatus.value!!)
+            homeViewModel.setHomeStatusValue(true)
+        else
+            homeViewModel.setHomeStatusValue(false)
     }
 
 
