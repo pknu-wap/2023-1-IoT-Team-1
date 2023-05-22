@@ -42,7 +42,7 @@ class MypageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 //        dataViewModel.insertAll(GraphEntity(20230521F,1F,2F,3F))
-        homeViewModel.setFoodData(10F)
+        homeViewModel.setWaterTemperatureData(20F)
         return inflater.inflate(R.layout.fragment_mypage, container, false)
     }
 

@@ -6,9 +6,8 @@
 
     <data>
         <variable
-            name="viewModelXml"
-            type="com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel" />
-
+            name="listitem"
+            type="com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,9 +38,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/itemDescData"
                 app:layout_constraintVertical_weight="2"
-                android:text="제목"
+                android:text="@{listitem.title}"
                 android:textSize="25dp"
                 android:textAlignment="center"
+                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
                 />
 
             <TextView
@@ -51,9 +51,10 @@
                 app:layout_constraintTop_toBottomOf="@id/itemDescTitle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_weight="1"
-                android:text="내용"
+                android:text="@{listitem.data}"
                 android:textSize="20dp"
                 android:textAlignment="center"
+                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

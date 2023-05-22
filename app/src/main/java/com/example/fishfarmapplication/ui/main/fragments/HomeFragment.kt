@@ -38,93 +38,42 @@ class HomeFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
-        val itemList = ArrayList<HomeListItem>()
-        val waterData = homeViewModel.waterTemperatureData
-        val phData = homeViewModel.phData
+        binding.viewModelXml = homeViewModel
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
-        checkData()
+        homeViewModel.checkData()
 
-        val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
-        homeViewModel.foodData.value!!)
+//        val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
+//        homeViewModel.foodData.value!!)
+//
+//        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString(), homeViewModel.waterTemperatureStatus.value!!))
+//        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
+//        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
-        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString(), homeViewModel.waterTemperatureStatus.value!!))
-        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
-        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
-
-        itemAdapter = HomeListAdapter(itemList)
         val itemDeco = HomeListDeco(30)
 
-        itemAdapter.notifyDataSetChanged()
-        binding.homeRecyclerView.adapter = itemAdapter
         binding.homeRecyclerView.addItemDecoration(itemDeco)
         binding.homeCenterStatusLayout.setOnClickListener {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
-
         }
 
+//        binding.homeCenterStatusLayout.setOnClickListener {
+//            homeViewModel.setPhData(homeViewModel.phData.value!! + 1)
+//        }
+//
         homeViewModel.phData.observe(viewLifecycleOwner, Observer {
-            updateHomeList(itemAdapter)
-            binding.invalidateAll()
+            homeViewModel.checkData()
         })
-
         homeViewModel.waterTemperatureData.observe(viewLifecycleOwner, Observer {
-            updateHomeList(itemAdapter)
-            binding.invalidateAll()
+            homeViewModel.checkData()
         })
-
         homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
-            updateHomeList(itemAdapter)
-            binding.invalidateAll()
-        })
+            homeViewModel.checkData()
 
-        homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
-            binding.invalidateAll()
         })
-
-        homeViewModel.standard.observe(viewLifecycleOwner, Observer {
-            checkData()
-            updateHomeList(itemAdapter)
-            binding.invalidateAll()
-        })
-
-        binding.viewModelXml= homeViewModel
 
         return binding.root
     }
-
-    fun updateHomeList(itemAdapter: HomeListAdapter){
-        Log.d("test", "update home list")
-        itemAdapter.updateWaterData(homeViewModel.waterTemperatureData.value!!, homeViewModel.waterTemperatureStatus.value!!)
-        itemAdapter.updatePhData(homeViewModel.phData.value!!,homeViewModel.phStatus.value!!)
-        itemAdapter.updateFoodData(homeViewModel.foodData.value!!,homeViewModel.foodStatus.value!!)
-        itemAdapter.notifyDataSetChanged()
-    }
-
-    fun checkData(){
-        if(homeViewModel.waterTemperatureData.value != homeViewModel.standard.value!!.waterTemperature){
-            homeViewModel.setWaterTemperatureStatus(false)
-        } else
-            homeViewModel.setWaterTemperatureStatus(true)
-
-        if(homeViewModel.phData.value != homeViewModel.standard.value!!.ph){
-            homeViewModel.setPhStatus(false)
-        }else
-            homeViewModel.setPhStatus(true)
-
-        if(homeViewModel.foodData.value != homeViewModel.standard.value!!.food)
-            homeViewModel.setFoodStatus(false)
-        else
-            homeViewModel.setFoodStatus(true)
-
-        if(homeViewModel.waterTemperatureStatus.value!! && homeViewModel.phStatus.value!!
-            && homeViewModel.foodStatus.value!!)
-            homeViewModel.setHomeStatusValue(true)
-        else
-            homeViewModel.setHomeStatusValue(false)
-    }
-
-
-
 
 
 

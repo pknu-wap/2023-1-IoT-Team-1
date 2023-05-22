@@ -3,6 +3,7 @@ package com.example.fishfarmapplication.ui.main.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
 import java.util.Date
 
 class HomeViewModel : ViewModel(){
@@ -11,17 +12,13 @@ class HomeViewModel : ViewModel(){
 
     val homeStatus : LiveData<Boolean> get() = _homeStatus
 
-    private var _standard = MutableLiveData<Standard>()
+    private var _waterTemperatureStandard = MutableLiveData<Float>()
+    private var _phStandard = MutableLiveData<Float>()
+    private var _foodStandard = MutableLiveData<Float>()
 
-//    private var _waterTemperatureStandard = MutableLiveData<Float>()
-//    private var _phStandard = MutableLiveData<Float>()
-//    private var _foodStandard = MutableLiveData<Float>()
-
-    val standard : LiveData<Standard> get() = _standard
-
-//    val waterTemperatureStandard : LiveData<Float> get() = _waterTemperatureStandard
-//    val phStandard : LiveData<Float> get() = _phStandard
-//    val foodStandard : LiveData<Float> get() = _foodStandard
+    val waterTemperatureStandard : LiveData<Float> get() = _waterTemperatureStandard
+    val phStandard : LiveData<Float> get() = _phStandard
+    val foodStandard : LiveData<Float> get() = _foodStandard
 
     private var _waterTemperatureData =MutableLiveData<Float>()
     private var _phData = MutableLiveData<Float>()
@@ -39,50 +36,57 @@ class HomeViewModel : ViewModel(){
     val phStatus : LiveData<Boolean> get() = _phStatus
     val foodStatus : LiveData<Boolean> get() = _foodStatus
 
+    private val _homeItemList = MutableLiveData<ArrayList<HomeListItem>>()
+
+    val homeItemList : LiveData<ArrayList<HomeListItem>> get() = _homeItemList
+
+    private lateinit var homeItems : ArrayList<HomeListItem>
+
     init {
         _homeStatus.value = true
 
-//        _waterTemperatureStandard.value = 10F
-//        _phStandard.value = 10F
-//        _foodStandard.value = 4F
+        _waterTemperatureStandard.value = 10F
+        _phStandard.value = 10F
+        _foodStandard.value = 4F
 
-        _standard.value = Standard()
 
         _waterTemperatureData.value = 10F
         _phData.value = 10F
         _foodData.value = 4F
 
-        val currentStandard = standard.value
-        if(currentStandard != null){
-            _waterTemperatureStatus.value = if(currentStandard.waterTemperature == waterTemperatureData.value) true else false
-            _phStatus.value = if(currentStandard.ph == phData.value) true else false
-            _foodStatus.value = if(currentStandard.food == foodData.value) true else false
-        }
+        _waterTemperatureStatus.value = if(waterTemperatureStandard.value == waterTemperatureData.value) true else false
+        _phStatus.value = if(phStandard.value == phData.value) true else false
+        _foodStatus.value = if(foodStandard.value == foodData.value) true else false
+
+        homeItems = arrayListOf(
+            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!),
+            HomeListItem("PH", phData.value.toString(), phStatus.value!!),
+            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!)
+        )
+        _homeItemList.value = homeItems
 
 //        _waterTemperatureStatus.value = if(standard.value.waterTemperature == waterTemperatureData.value) true else false
 //        _foodStatus.value = if(foodStandard.value == foodData.value) true else false
 //        _phStatus.value = if(phStandard.value == phData.value) true else false
+
+
 
     }
     fun setHomeStatusValue(boolean: Boolean){
         _homeStatus.value = boolean
     }
 
-    fun getHomeStatusValue() : Boolean?{
-        return homeStatus.value
-    }
-
     fun setWaterTemperatureStandard(float : Float){
-        _standard.value!!.waterTemperature = float
+        _waterTemperatureStandard.value = float
     }
 
     fun setPhStandard(float: Float){
-        _standard.value!!.ph = float
+        _phStandard.value = float
 //        _phStandard.value = float
     }
 
     fun setFoodStandard(float: Float){
-        _standard.value!!.food = float
+        _foodStandard.value = float
     }
 
     fun setWaterTemperatureData(float: Float){
@@ -109,7 +113,39 @@ class HomeViewModel : ViewModel(){
         _foodStatus.value = boolean
     }
 
-    data class Standard(var waterTemperature : Float = 10f, var ph : Float = 11f, var food : Float = 4f)
+    fun updateHomeList() {
+        val list = arrayListOf<HomeListItem>(
+            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!),
+            HomeListItem("PH", phData.value.toString(), phStatus.value!!),
+            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!)
+        )
+        _homeItemList.value = list
+    }
+
+    fun checkData(){
+        if(waterTemperatureData.value != waterTemperatureStandard.value){
+            _waterTemperatureStatus.value = false
+        } else
+            _waterTemperatureStatus.value = true
+
+        if(phData.value != phStandard.value){
+            _phStatus.value = false
+        }else
+            _phStatus.value = true
+
+        if(foodData.value != foodStandard.value)
+            _foodStatus.value = false
+        else
+            _foodStatus.value = true
+
+        if(waterTemperatureStatus.value!! && phStatus.value!!
+            && foodStatus.value!!)
+            _homeStatus.value = true
+        else
+            _homeStatus.value = false
+
+        updateHomeList()
+    }
 
 
 
