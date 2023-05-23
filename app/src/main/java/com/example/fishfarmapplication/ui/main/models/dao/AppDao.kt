@@ -22,12 +22,13 @@ interface AppDao {
 //    @Query("select * from Ph")
 //    fun getAllPh() : LiveData<List<PhEntity>>
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(entity: GraphEntity)
+    suspend fun insertAll(entity: GraphEntity)
 
 
     @Query("delete from GraphData")
-    fun deleteAll()
+    suspend fun deleteAll()
 
 //    @Query("delete from Ph")
 //    fun deleteAllPh()

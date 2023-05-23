@@ -1,6 +1,7 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,17 +23,24 @@ class GraphFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGraphBinding.inflate(inflater, container, false)
+
         val chartWaterData = graphDataViewModel.allWaterTemperatures.value
-        val phData = graphDataViewModel.getAllPh()
+        val phData = graphDataViewModel.allPh.value
+
         if (chartWaterData != null)
             waterChart = Graph.of(binding.waterChart, chartWaterData)
         else
             waterChart = Graph(binding.waterChart)
 
-        if(phData != null)
+        if(phData != null){
+            Log.d("test", "phData : " + phData[0].phData.toString())
             phChart = Graph.from(binding.phChart, phData)
-        else
+        }
+        else{
+            Log.d("graph", "failed")
             phChart = Graph(binding.phChart)
+        }
+
 
         return binding.root
     }

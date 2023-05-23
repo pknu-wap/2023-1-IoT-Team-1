@@ -44,23 +44,6 @@ class HomeListAdapter ()
         return itemList.count()
     }
 
-//    fun updateWaterData(float : Float, _status : Boolean) {
-//        itemList[0].data = float.toString()
-//        itemList[0].status = _status
-//    }
-//
-//    fun updatePhData(float: Float, _status: Boolean){
-//        itemList[1].data = float.toString()
-//        itemList[1].status = _status
-//    }
-//
-//    fun updateFoodData(float: Float,_status: Boolean){
-//        itemList[2].data = float.toString()
-//        itemList[2].status = _status
-//    }
-
-
-
 }
 
 

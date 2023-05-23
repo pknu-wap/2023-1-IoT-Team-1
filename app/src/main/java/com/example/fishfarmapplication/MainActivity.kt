@@ -41,12 +41,14 @@ class MainActivity : AppCompatActivity() {
         idViewModel.updateIdValue(idval)
         Log.d("값 받기", idViewModel.getValue().toString())
 
-        lifecycleScope.launch(Dispatchers.IO){
-//            graphDataViewModel.deleteAll()
-//            graphDataViewModel.insertAll(GraphEntity(20230518F,2F,3F,4F))
-//            graphDataViewModel.insertAll(GraphEntity(20230521F,3F,1F,2F))
-//            graphDataViewModel.insertAll(GraphEntity(20230520F,1F,4f,3F))
-        }
+        graphDataViewModel.insertAll(GraphEntity(20230521F,3F,1F,2F))
+        graphDataViewModel.insertAll(GraphEntity(20230520F,1F,4f,3F))
+
+//        lifecycleScope.launch(Dispatchers.IO){
+////            graphDataViewModel.deleteAll()
+////            graphDataViewModel.insertAll(GraphEntity(20230518F,2F,3F,4F))
+//
+//        }
 
 
         viewModel.fragmentStatus.observe(this, Observer {
