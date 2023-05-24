@@ -28,19 +28,18 @@ class HomeListAdapter (val id: String)
     :RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>(){
       
     var itemList = mutableListOf<HomeListItem>()
-    inner class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-    private val database =
-        Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
-    private val idRef = database.getReference("users").child(id)
-
     inner class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val database =
+            Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+        private val idRef = database.getReference("users").child(id)
+
         val titleView: TextView = itemView.findViewById<TextView>(R.id.itemDescTitle)
         val DataView: TextView = itemView.findViewById<TextView>(R.id.itemDescData)
         val button: Button = itemView.findViewById<Button>(R.id.btnTest)
 
-        fun bind(position: Int){
-            titleView.text= itemList[position].title
-            DataView.text=itemList[position].data
+        fun bind(position: Int) {
+            titleView.text = itemList[position].title
+            DataView.text = itemList[position].data
             button.setOnClickListener {
                 val text = EditText(itemView.context)
                 text.gravity = Gravity.CENTER
@@ -53,11 +52,12 @@ class HomeListAdapter (val id: String)
                                 "확인",
                                 DialogInterface.OnClickListener { dialog, which ->
                                     val tempStandard = text.text.toString().toFloat()
-                                    idRef.child("temperature").child("standard").setValue(tempStandard)
+                                    idRef.child("temperature").child("standard")
+                                        .setValue(tempStandard)
                                 })
                             .setNegativeButton(
                                 "취소",
-                                DialogInterface.OnClickListener{ dialog, which ->
+                                DialogInterface.OnClickListener { dialog, which ->
                                 }
                             )
                         builder.show()
@@ -74,7 +74,7 @@ class HomeListAdapter (val id: String)
                                 })
                             .setNegativeButton(
                                 "취소",
-                                DialogInterface.OnClickListener{ dialog, which ->
+                                DialogInterface.OnClickListener { dialog, which ->
                                 }
                             )
                         builder.show()
@@ -91,18 +91,19 @@ class HomeListAdapter (val id: String)
                                 })
                             .setNegativeButton(
                                 "취소",
-                                DialogInterface.OnClickListener{ dialog, which ->
+                                DialogInterface.OnClickListener { dialog, which ->
                                 }
                             )
                         builder.show()
                     }
                 }
-            if(itemList[position].status){
-                titleView.setTextColor(Color.parseColor("#74D6EA"))
-                DataView.setTextColor(Color.parseColor("#74D6EA"))
-            } else {
-                titleView.setTextColor(Color.parseColor("#F06C83"))
-                DataView.setTextColor(Color.parseColor("#F06C83"))
+                if (itemList[position].status) {
+                    titleView.setTextColor(Color.parseColor("#74D6EA"))
+                    DataView.setTextColor(Color.parseColor("#74D6EA"))
+                } else {
+                    titleView.setTextColor(Color.parseColor("#F06C83"))
+                    DataView.setTextColor(Color.parseColor("#F06C83"))
+                }
             }
         }
     }
