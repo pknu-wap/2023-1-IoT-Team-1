@@ -32,6 +32,7 @@ class LedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         id = idViewModel.getValue().toString()
+        Log.d("id", id)
         ledRef = database.getReference("users").child(id).child("led")
     }
 

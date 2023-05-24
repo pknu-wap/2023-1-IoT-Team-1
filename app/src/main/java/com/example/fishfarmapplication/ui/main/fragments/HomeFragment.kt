@@ -1,6 +1,5 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,19 +14,22 @@ import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
-import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 
 class HomeFragment : Fragment() {
 
+    private lateinit var id: String
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     private lateinit var itemAdapter : HomeListAdapter
-
+    private val idViewModel: IdViewModel by activityViewModels()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        id = idViewModel.getValue().toString()
     }
 
 
@@ -50,6 +52,8 @@ class HomeFragment : Fragment() {
 //        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
 //        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
+
+        val itemAdapter = HomeListAdapter(id)
         val itemDeco = HomeListDeco(30)
 
         binding.homeRecyclerView.addItemDecoration(itemDeco)
@@ -74,12 +78,4 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-
-
-
-
-
-
-
-
 }
