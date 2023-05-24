@@ -32,8 +32,6 @@ class HomeFragment : Fragment() {
         id = idViewModel.getValue().toString()
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
