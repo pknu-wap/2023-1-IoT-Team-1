@@ -6,7 +6,7 @@
 #include <addons/RTDBHelper.h>
 
 #define WIFI_SSID "AndroidHotspot1440"
-#define WIFI_PASSWORD "84571440"
+#define WIFI_PASSWORD "password"
 
 #define API_KEY "password"
 #define DATABASE_URL "test-for-connect-3424c-default-rtdb.asia-southeast1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
