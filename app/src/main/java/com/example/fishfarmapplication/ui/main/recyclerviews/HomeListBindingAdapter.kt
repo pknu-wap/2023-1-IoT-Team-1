@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 object HomeListBindingAdapter {
     @BindingAdapter("items")
     @JvmStatic
-    fun setItems(recyclerView: RecyclerView, items : ArrayList<HomeListItem>, id : String){
+    fun setItems(recyclerView: RecyclerView, items : ArrayList<HomeListItem>){
         if(recyclerView.adapter == null)
-            recyclerView.adapter = HomeListAdapter(id)
+            recyclerView.adapter = HomeListAdapter()
 
         val adapter = recyclerView.adapter as HomeListAdapter
 

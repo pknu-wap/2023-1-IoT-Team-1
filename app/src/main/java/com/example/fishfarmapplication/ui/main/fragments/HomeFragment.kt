@@ -52,8 +52,6 @@ class HomeFragment : Fragment() {
 //        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
 //        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
-
-        val itemAdapter = HomeListAdapter(id)
         val itemDeco = HomeListDeco(30)
 
         binding.homeRecyclerView.addItemDecoration(itemDeco)
