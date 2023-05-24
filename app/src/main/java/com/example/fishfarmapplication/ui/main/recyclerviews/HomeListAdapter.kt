@@ -23,12 +23,14 @@ import com.example.fishfarmapplication.databinding.ItemHomeRecyclerViewBinding
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.util.logging.Handler
+class HomeListAdapter() : RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
 
-class HomeListAdapter :RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>(){
-      
     var itemList = mutableListOf<HomeListItem>()
 
     inner class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+//        private val database =
+//            Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+//        private val idRef = database.getReference("users").child(id)
 
         val titleView: TextView = itemView.findViewById<TextView>(R.id.itemDescTitle)
         val DataView: TextView = itemView.findViewById<TextView>(R.id.itemDescData)
