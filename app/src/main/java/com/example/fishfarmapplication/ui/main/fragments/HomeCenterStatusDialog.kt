@@ -30,6 +30,8 @@ class HomeCenterStatusDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FragmentDialogHomeCenterBinding.inflate(LayoutInflater.from(context))
 
+        binding.viewModelXml = homeViewModel
+
         currentStandardData = currentStandardData(homeViewModel.waterTemperatureStandard.value!!, homeViewModel.phStandard.value!!,
             homeViewModel.foodStandard.value!!)
 
@@ -55,8 +57,8 @@ class HomeCenterStatusDialog : DialogFragment() {
         homeViewModel.setWaterTemperatureStandard(newWaterStandard)
         homeViewModel.setPhStandard(newPhStandard)
         homeViewModel.setFoodStandard(newFoodStandard)
-
-        checkStandard(newWaterStandard,newPhStandard,newFoodStandard)
+        homeViewModel.checkData()
+//        checkStandard(newWaterStandard,newPhStandard,newFoodStandard)
         _binding = null
     }
 
@@ -64,29 +66,6 @@ class HomeCenterStatusDialog : DialogFragment() {
         const val TAG = "HomeCenterStatusDialog"
     }
 
-    fun checkStandard(newWaterStandard : Float, newPhStandard : Float, newFoodStandard : Float){
-        if(currentData.waterData != newWaterStandard){
-            homeViewModel.setWaterTemperatureStatus(false)
-        } else
-            homeViewModel.setWaterTemperatureStatus(true)
-
-        if(currentData.phData != newPhStandard){
-            homeViewModel.setPhStatus(false)
-        }else
-            homeViewModel.setPhStatus(true)
-
-        if(currentData.foodData != newFoodStandard)
-            homeViewModel.setFoodStatus(false)
-        else
-            homeViewModel.setFoodStatus(true)
-
-
-        if(homeViewModel.waterTemperatureStatus.value!! && homeViewModel.phStatus.value!!
-            && homeViewModel.foodStatus.value!!)
-            homeViewModel.setHomeStatusValue(true)
-        else
-            homeViewModel.setHomeStatusValue(false)
-    }
 
 }
 

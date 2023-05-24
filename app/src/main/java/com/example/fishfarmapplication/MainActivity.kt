@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.fishfarmapplication.databinding.ActivityMainBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.fragments.*
-import com.example.fishfarmapplication.ui.main.models.entity.WaterTemperatureEntity
+import com.example.fishfarmapplication.ui.main.models.entity.GraphEntity
 import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 import com.google.firebase.database.DataSnapshot
@@ -72,12 +72,13 @@ class MainActivity : AppCompatActivity() {
         hideActionBar()
         idViewModel.updateIdValue(idval)
 
-        lifecycleScope.launch(Dispatchers.IO) {
-//            graphDataViewModel.deleteAllWaterTemperature()
-//            graphDataViewModel.insert(WaterTemperatureEntity(1F,2F))
-//            graphDataViewModel.insert(WaterTemperatureEntity(2F,4F))
-//            graphDataViewModel.insert(WaterTemperatureEntity(3F,5F))
-        }
+        graphDataViewModel.insertAll(GraphEntity(20230521F,3F,1F,2F))
+        graphDataViewModel.insertAll(GraphEntity(20230520F,1F,4f,3F))
+//        lifecycleScope.launch(Dispatchers.IO){
+////            graphDataViewModel.deleteAll()
+////            graphDataViewModel.insertAll(GraphEntity(20230518F,2F,3F,4F))
+//
+//        }
 
 
         viewModel.fragmentStatus.observe(this, Observer {

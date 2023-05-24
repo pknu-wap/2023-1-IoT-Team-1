@@ -1,6 +1,7 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +15,33 @@ import com.example.fishfarmapplication.ui.main.viewmodels.GraphDataViewModel
 class GraphFragment : Fragment() {
     private val graphDataViewModel: GraphDataViewModel by activityViewModels()
     private lateinit var binding : FragmentGraphBinding
-    private lateinit var chart: Graph
+    private lateinit var waterChart: Graph
+    private lateinit var phChart : Graph
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGraphBinding.inflate(inflater, container, false)
-        val charData = graphDataViewModel.getAllWaterTemperature()
-        if (charData != null)
-            chart = Graph(binding.testChart, charData)
+
+        val chartWaterData = graphDataViewModel.allWaterTemperatures.value
+        val phData = graphDataViewModel.allPh.value
+
+        if (chartWaterData != null)
+            waterChart = Graph.of(binding.waterChart, chartWaterData)
         else
-            chart = Graph(binding.testChart)
+            waterChart = Graph(binding.waterChart)
+
+        if(phData != null){
+            Log.d("test", "phData : " + phData[0].phData.toString())
+            phChart = Graph.from(binding.phChart, phData)
+        }
+        else{
+            Log.d("graph", "failed")
+            phChart = Graph(binding.phChart)
+        }
+
+
         return binding.root
     }
 
@@ -34,7 +50,7 @@ class GraphFragment : Fragment() {
 
         graphDataViewModel.allWaterTemperatures.observe(viewLifecycleOwner, Observer { it->
             it?.let {
-                chart.updateData(it)
+                waterChart.updateData(it)
             }
         })
 

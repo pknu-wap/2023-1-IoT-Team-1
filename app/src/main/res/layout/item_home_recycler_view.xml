@@ -1,53 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+
+
+
+
+
+
+
+
+xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="@drawable/home_fragment_item_background">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/homeItemLeftMarginLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/homeItemDescLayout"
-        app:layout_constraintHorizontal_weight="0.2"/>
+    <data>
+        <variable
+            name="listitem"
+            type="com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/homeItemDescLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toEndOf="@id/homeItemLeftMarginLayout"
-        app:layout_constraintEnd_toStartOf="@id/homeItemRightMarginLayout"
-        app:layout_constraintHorizontal_weight="2">
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
 
-        <TextView
-            android:id="@+id/itemDescTitle"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/itemDescData"
-            app:layout_constraintVertical_weight="2"
-            android:text="제목"
-            android:textSize="25dp"
-            android:textAlignment="center"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeItemLeftMarginLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/homeItemDescLayout"
+            app:layout_constraintHorizontal_weight="0.2"
             />
 
-        <TextView
-            android:id="@+id/itemDescData"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/itemDescTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_weight="1"
-            android:text="내용"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeItemDescLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/homeItemLeftMarginLayout"
+            app:layout_constraintEnd_toStartOf="@id/homeItemRightMarginLayout"
+            app:layout_constraintHorizontal_weight="2">
 
+            <TextView
+                android:id="@+id/itemDescTitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/itemDescData"
+                app:layout_constraintVertical_weight="2"
+                android:text="@{listitem.title}"
+                android:textSize="25dp"
+                android:textAlignment="center"
+                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
+                />
+
+            <TextView
+                android:id="@+id/itemDescData"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/itemDescTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_weight="1"
+                android:text="@{listitem.data}"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeItemRightMarginLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/homeItemDescLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="5"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</layout>
+
+
+
+
+
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeItemRightMarginLayout"
@@ -69,3 +117,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

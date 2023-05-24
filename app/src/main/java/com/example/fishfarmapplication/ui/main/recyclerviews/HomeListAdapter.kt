@@ -1,5 +1,6 @@
 package com.example.fishfarmapplication.ui.main.recyclerviews
 
+import android.graphics.Color
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Looper
@@ -11,18 +12,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fishfarmapplication.MainActivity
 import com.example.fishfarmapplication.R
+import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 import com.example.fishfarmapplication.databinding.ItemHomeRecyclerViewBinding
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.util.logging.Handler
 
-class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
-    RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>() {
+class HomeListAdapter (val id: String)
+    :RecyclerView.Adapter<HomeListAdapter.HomeListViewHolder>(){
+      
+    var itemList = mutableListOf<HomeListItem>()
+    inner class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     private val database =
         Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
     private val idRef = database.getReference("users").child(id)
@@ -32,9 +38,9 @@ class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
         val DataView: TextView = itemView.findViewById<TextView>(R.id.itemDescData)
         val button: Button = itemView.findViewById<Button>(R.id.btnTest)
 
-        fun bind(position: Int) {
-            titleView.text = itemList[position].title
-            DataView.text = itemList[position].data
+        fun bind(position: Int){
+            titleView.text= itemList[position].title
+            DataView.text=itemList[position].data
             button.setOnClickListener {
                 val text = EditText(itemView.context)
                 text.gravity = Gravity.CENTER
@@ -91,6 +97,12 @@ class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
                         builder.show()
                     }
                 }
+            if(itemList[position].status){
+                titleView.setTextColor(Color.parseColor("#74D6EA"))
+                DataView.setTextColor(Color.parseColor("#74D6EA"))
+            } else {
+                titleView.setTextColor(Color.parseColor("#F06C83"))
+                DataView.setTextColor(Color.parseColor("#F06C83"))
             }
         }
     }
@@ -111,5 +123,3 @@ class HomeListAdapter(val itemList: ArrayList<HomeListItem>, val id: String) :
         return itemList.count()
     }
 }
-
-data class HomeListItem(val title: String, val data: String);

@@ -1,6 +1,7 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,16 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
+
+    private lateinit var itemAdapter : HomeListAdapter
     private val idViewModel: IdViewModel by activityViewModels()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         id = idViewModel.getValue().toString()
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,37 +40,42 @@ class HomeFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
+        binding.viewModelXml = homeViewModel
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
-        val itemList = ArrayList<HomeListItem>()
-        itemList.add(HomeListItem("수온","테스트"))
-        itemList.add(HomeListItem("PH","테스트"))
-        itemList.add(HomeListItem("먹이","테스트"))
+        homeViewModel.checkData()
 
-        val itemAdapter = HomeListAdapter(itemList, id)
+//        val recentcurrentData = currentData(homeViewModel.waterTemperatureData.value!!,homeViewModel.phData.value!!,
+//        homeViewModel.foodData.value!!)
+//
+//        itemList.add(HomeListItem("수온",recentcurrentData.waterData.toString(), homeViewModel.waterTemperatureStatus.value!!))
+//        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
+//        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
+
+
+        val itemAdapter = HomeListAdapter(id)
         val itemDeco = HomeListDeco(30)
-        itemAdapter.notifyDataSetChanged()
-        binding.homeRecyclerView.adapter = itemAdapter
+
         binding.homeRecyclerView.addItemDecoration(itemDeco)
         binding.homeCenterStatusLayout.setOnClickListener {
             HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
         }
 
-        homeViewModel.homeStatus.observe(viewLifecycleOwner, Observer {
-            binding.invalidateAll()
+//        binding.homeCenterStatusLayout.setOnClickListener {
+//            homeViewModel.setPhData(homeViewModel.phData.value!! + 1)
+//        }
+//
+        homeViewModel.phData.observe(viewLifecycleOwner, Observer {
+            homeViewModel.checkData()
+        })
+        homeViewModel.waterTemperatureData.observe(viewLifecycleOwner, Observer {
+            homeViewModel.checkData()
+        })
+        homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
+            homeViewModel.checkData()
+
         })
 
-        binding.viewModelXml= homeViewModel
-
-        binding.lifecycleOwner = this
-
         return binding.root
-    }
-
-    companion object{
-        fun newInstance(title:String) = HomeFragment().apply {
-            arguments = Bundle().apply {
-                putString("title", title)
-            }
-        }
     }
 }
