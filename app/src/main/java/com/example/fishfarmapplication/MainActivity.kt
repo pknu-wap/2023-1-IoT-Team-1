@@ -40,19 +40,29 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: PageViewModel by viewModels()
     private val graphDataViewModel: GraphDataViewModel by viewModels()
     private val idViewModel: IdViewModel by viewModels()
+    var count = 0
 
     private val database =
         Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
     private val myRef = database.getReference("sensor")
+    val query: Query = myRef.limitToFirst(3)
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        val query: Query = myRef.orderByValue().limitToFirst(1)
-
+    fun test() {
         query.addValueEventListener(object : ValueEventListener {
+            var sum = 0.0
+            var count = 0
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (childSnapshot in dataSnapshot.children) {
                     val childValue = childSnapshot.getValue(Double::class.java)
-                    Log.d("파이어베이스", childValue.toString())
+                    if (childValue != null) {
+                        sum += childValue
+                        count++
+                    }
+                }
+
+                if (count > 0) {
+                    val average = sum / count
+                    Log.d("평균", average.toString())
                 }
             }
 
@@ -60,6 +70,9 @@ class MainActivity : AppCompatActivity() {
                 // 에러 처리
             }
         })
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         return super.onCreateView(name, context, attrs)
     }
 
@@ -72,8 +85,8 @@ class MainActivity : AppCompatActivity() {
         hideActionBar()
         idViewModel.updateIdValue(idval)
 
-        graphDataViewModel.insertAll(GraphEntity(20230521F,3F,1F,2F))
-        graphDataViewModel.insertAll(GraphEntity(20230520F,1F,4f,3F))
+        graphDataViewModel.insertAll(GraphEntity(20230521F, 3F, 1F, 2F))
+        graphDataViewModel.insertAll(GraphEntity(20230520F, 1F, 4f, 3F))
 //        lifecycleScope.launch(Dispatchers.IO){
 ////            graphDataViewModel.deleteAll()
 ////            graphDataViewModel.insertAll(GraphEntity(20230518F,2F,3F,4F))

@@ -9,6 +9,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.fishfarmapplication.databinding.FragmentDialogHomeCenterBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class HomeCenterStatusDialog : DialogFragment() {
 
@@ -22,9 +25,18 @@ class HomeCenterStatusDialog : DialogFragment() {
 
     private lateinit var currentData: currentData
 
+    private lateinit var id: String
+
+    private val idViewModel : IdViewModel by activityViewModels()
+
+    private val database =
+        Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    private val myRef = database.getReference("users")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = true
+        id = idViewModel.getValue().toString()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -52,7 +64,10 @@ class HomeCenterStatusDialog : DialogFragment() {
         val newWaterStandard = binding.homeCenterStatusDialogWaterTemperatureData.text.toString().toFloatOrNull() ?: currentStandardData.waterStandard
         val newPhStandard = binding.homeCenterStatusDialogPHData.text.toString().toFloatOrNull() ?: currentStandardData.phStandard
         val newFoodStandard = binding.homeCenterStatusDialogFoodData.text.toString().toFloatOrNull() ?: currentStandardData.foodStandard
-        Log.d("test", "test : " + newWaterStandard)
+
+        myRef.child(id).child("temperature").setValue(newWaterStandard)
+        myRef.child(id).child("ph").setValue(newPhStandard)
+        myRef.child(id).child("feed").setValue(newFoodStandard)
 
         homeViewModel.setWaterTemperatureStandard(newWaterStandard)
         homeViewModel.setPhStandard(newPhStandard)
