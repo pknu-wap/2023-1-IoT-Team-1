@@ -21,7 +21,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var id: String
     private lateinit var binding : FragmentHomeBinding
-    private val viewModel: PageViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by activityViewModels()
 
     private lateinit var itemAdapter : HomeListAdapter
