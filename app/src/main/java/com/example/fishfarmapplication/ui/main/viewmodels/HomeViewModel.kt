@@ -42,9 +42,6 @@ class HomeViewModel : ViewModel(){
 
     private lateinit var homeItems : ArrayList<HomeListItem>
 
-    private var _medicineRemainTime = MutableLiveData<Float>()
-
-    val medicineRemainTime : LiveData<Float> get() = _medicineRemainTime
     init {
         _homeStatus.value = true
 
@@ -68,7 +65,6 @@ class HomeViewModel : ViewModel(){
         )
         _homeItemList.value = homeItems
 
-        _medicineRemainTime.value = 120608F //DD HH MM
 
 
 //        _waterTemperatureStatus.value = if(standard.value.waterTemperature == waterTemperatureData.value) true else false

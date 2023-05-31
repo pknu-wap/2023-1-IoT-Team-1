@@ -71,7 +71,7 @@
         android:id="@+id/medicineItemMiddleLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/medicineItemStartLayout"
         app:layout_constraintEnd_toStartOf="@id/medicineItemEndLayout"
         >
@@ -81,7 +81,7 @@
         android:id="@+id/medicineItemEndLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@id/medicineItemMiddleLayout"
         app:layout_constraintEnd_toEndOf="parent"
         >

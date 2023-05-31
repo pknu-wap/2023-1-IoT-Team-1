@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.FragmentMedicineBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
+import com.example.fishfarmapplication.ui.main.viewmodels.MedicineViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,8 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MedicineFragment : Fragment() {
-
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val medicineViewModel : MedicineViewModel by activityViewModels()
     private lateinit var binding : FragmentMedicineBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +40,9 @@ class MedicineFragment : Fragment() {
 //            HomeCenterStatusDialog().show(childFragmentManager,HomeCenterStatusDialog.TAG)
             MedicineAddTimeDialog().show(childFragmentManager,MedicineAddTimeDialog.TAG)
         }
+
+        binding.viewModelXml = medicineViewModel
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
     }
