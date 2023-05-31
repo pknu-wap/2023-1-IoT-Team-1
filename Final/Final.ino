@@ -10,6 +10,7 @@
 #include <NTPClient.h>
 #include <OneWire.h>
 #include "time.h"
+#include <ESP32Servo.h>
 
 #define WIFI_SSID "AndroidHotspot1440"
 #define WIFI_PASSWORD "password"
@@ -26,6 +27,7 @@
 #define TRIG 32
 #define ECHO 33
 #define DS_pin 2
+#define SERVO_PIN 26
 
 // Define Firebase Data object
 FirebaseData fbdo;
@@ -39,11 +41,21 @@ const int daylightOffset_sec = 3600;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", 9 * 3600);
 OneWire ds(DS_pin);
+Servo servoMotor;
 
 unsigned long sendDataPrevMillis = 0;
 unsigned long count = 0;
 int year, month, day, Hour, Min, Sec;
 int R, G, B;
+
+void servoSetup(){
+  ESP32PWM::allocateTimer(0);
+  ESP32PWM::allocateTimer(1);
+  ESP32PWM::allocateTimer(2);
+  ESP32PWM::allocateTimer(3);
+  myservo.setPeriodHertz(50);    
+  myservo.attach(servoPin, 500, 2400); 
+}
 
 long Ultra(){
   long duration, distance;
@@ -148,6 +160,7 @@ void setup() {
   ledcSetup(0, 5000, 8);
   ledcSetup(1, 5000, 8);
   ledcSetup(2, 5000, 8);
+  servoSetup();
   
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to Wi-Fi");
