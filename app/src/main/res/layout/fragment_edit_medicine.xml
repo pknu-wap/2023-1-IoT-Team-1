@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addMedicineUpLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/addMedicineLowLayout"
+            android:background="@color/skyblue">
+
+            <ImageView
+                android:id="@+id/addMedicineBackButton"
+                android:paddingLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_action_back_arrow"
+                />
+
+            <TextView
+                android:id="@+id/setDateTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
+                android:text="알람을 수정해주세요"
+                android:textAlignment="center" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addMedicineLowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="12"
+            app:layout_constraintTop_toBottomOf="@+id/addMedicineUpLayout"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addMedicineItemTitleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/addMedicineItemDescLayout"
+                app:layout_constraintVertical_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/addMedicineItemTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/addMedicineItemTitleData"
+                    android:text="약 이름"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    app:layout_constraintVertical_weight="1"/>
+
+                <EditText
+                    android:id="@+id/addMedicineItemTitleData"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toBottomOf="@id/addMedicineItemTitleTextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_weight="1"
+                    android:inputType="text"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addMedicineItemDescLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/addMedicineItemTitleLayout"
+                app:layout_constraintBottom_toTopOf="@+id/addMedicineItemTimeLayout"
+                app:layout_constraintVertical_weight="1">
+
+                <TextView
+                    android:id="@+id/addMedicineItemDescTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="약 설명"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    app:layout_constraintTop_toBottomOf="@id/addMedicineItemDescData"/>
+
+                <EditText
+                    android:id="@+id/addMedicineItemDescData"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/addMedicineItemDescTitle"
+                    android:inputType="text"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addMedicineItemTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/addMedicineItemDescLayout"
+                app:layout_constraintBottom_toTopOf="@id/addMedicineSumbitBtn"
+                app:layout_constraintVertical_weight="6">
+
+                <TextView
+                    android:id="@+id/addMedicineItemTimeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="날짜 및 시간"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <DatePicker
+                    android:id="@+id/addMedicineDatePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    app:layout_constraintTop_toBottomOf="@+id/addMedicineItemTimeTitle"
+                    app:layout_constraintBottom_toTopOf="@id/addMedicineTimePicker" />
+
+                <TimePicker
+                    android:id="@+id/addMedicineTimePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:timePickerMode="spinner"
+                    app:layout_constraintTop_toBottomOf="@id/addMedicineDatePicker" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addMedicineSumbitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:srcCompat="@drawable/rectangle2"
+                app:layout_constraintTop_toBottomOf="@+id/addMedicineItemTimeLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="제출하기"
+                app:layout_constraintVertical_weight="0.5"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
+
+
+
+

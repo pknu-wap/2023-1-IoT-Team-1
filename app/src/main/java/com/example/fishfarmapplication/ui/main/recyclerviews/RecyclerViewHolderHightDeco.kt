@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 //리사이클러뷰 아이템 밑에 간격 추가하는 클래스
-class HomeListDeco(divHeight:Int) : RecyclerView.ItemDecoration() {
+class RecyclerViewHolderHightDeco(divHeight:Int) : RecyclerView.ItemDecoration() {
     private var divHeight : Int = divHeight;
 
     override fun getItemOffsets(

@@ -10,6 +10,8 @@ class PageViewModel : ViewModel() {
     private var _fragmentStatus = MutableLiveData<PageType>()
 
 
+
+
     val fragmentStatus : LiveData<PageType> get() = _fragmentStatus
     init {
         _fragmentStatus.value = PageType.Home

@@ -14,6 +14,9 @@ class MedicineViewModel : ViewModel() {
 
     val medicineRemainTime : LiveData<Float> get() = _medicineRemainTime
 
+    private val _clickedMedicineItem = MutableLiveData<Int>()
+    val clickedMedicineItem : LiveData<Int> get() = _clickedMedicineItem
+
     private val _medicineItemList = MutableLiveData<ArrayList<MedicineListItem>>()
 
     val medicineItemList : LiveData<ArrayList<MedicineListItem>> get() = _medicineItemList
@@ -21,6 +24,7 @@ class MedicineViewModel : ViewModel() {
     init {
         _medicineRemainTime.value = 120608F //DD HH MM
 
+        _clickedMedicineItem.value = -1
 
         val medicineItems = arrayListOf(
             MedicineListItem("2023-05-31 12:13:00","test알람","테스트알람입니다~")
@@ -28,12 +32,16 @@ class MedicineViewModel : ViewModel() {
         _medicineItemList.value = medicineItems
     }
 
-    fun setMedicineItemList(items:ArrayList<MedicineListItem>){
-        _medicineItemList.value = items
+    fun setMedicineItemList(item:MedicineListItem, position: Int){
+        _medicineItemList.value!!.set(position,item)
     }
 
     fun addMedicineItemList(item:MedicineListItem){
         _medicineItemList.value!!.add(item)
+    }
+
+    fun setclickedMedicineItem(int: Int){
+        _clickedMedicineItem.value = int
     }
 
 

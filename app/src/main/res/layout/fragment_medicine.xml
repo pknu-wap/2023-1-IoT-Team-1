@@ -9,8 +9,12 @@
         <variable
             name="viewModelXml"
             type="com.example.fishfarmapplication.ui.main.viewmodels.MedicineViewModel" />
+        <variable
+            name="adapter"
+            type="com.example.fishfarmapplication.ui.main.recyclerviews.MedicineListAdapter" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/medicineMainFragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -68,34 +72,54 @@
             android:layout_height="0dp"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintTop_toBottomOf="@id/medicineTitleLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/white">
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/medicineLowerLeftMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/medicineRecyclerView"
+                app:layout_constraintHorizontal_weight="1"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/medicineRecyclerView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                medicineitems="@{viewModelXml.medicineItemList}"/>
+                android:adapter="@{adapter}"
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/medicinefloatingbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:layout_marginEnd="188dp"
-                android:layout_marginBottom="100dp"
-                android:contentDescription="plusButton"
-                app:backgroundTint="@color/skyblue"
-                app:elevation="6dp"
-                app:fabCustomSize="75dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_weight="40"
+                app:layout_constraintStart_toEndOf="@id/medicineLowerLeftMarginLayout"
+                app:layout_constraintEnd_toStartOf="@+id/medicineLowerRightMarginLayout"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/medicineLowerRightMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/medicineRecyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:maxImageSize="40dp" />
-
+                app:layout_constraintHorizontal_weight="1"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/medicinefloatingbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="188dp"
+            android:layout_marginBottom="100dp"
+            android:contentDescription="plusButton"
+            app:backgroundTint="@color/skyblue"
+            app:elevation="6dp"
+            app:fabCustomSize="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="40dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

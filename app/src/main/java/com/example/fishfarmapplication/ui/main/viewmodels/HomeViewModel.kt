@@ -3,6 +3,7 @@ package com.example.fishfarmapplication.ui.main.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
 import java.util.Date
 
@@ -59,9 +60,10 @@ class HomeViewModel : ViewModel(){
         _foodStatus.value = if(foodStandard.value == foodData.value) true else false
 
         homeItems = arrayListOf(
-            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!),
-            HomeListItem("PH", phData.value.toString(), phStatus.value!!),
-            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!)
+            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!,
+                R.drawable.ic_action_water_drop),
+            HomeListItem("PH", phData.value.toString(), phStatus.value!!,R.drawable.ic_action_ph),
+            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!,R.drawable.ic_action_food)
         )
         _homeItemList.value = homeItems
 
@@ -117,9 +119,10 @@ class HomeViewModel : ViewModel(){
 
     fun updateHomeList() {
         val list = arrayListOf<HomeListItem>(
-            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!),
-            HomeListItem("PH", phData.value.toString(), phStatus.value!!),
-            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!)
+            HomeListItem("수온",waterTemperatureData.value.toString(),waterTemperatureStatus.value!!,
+                R.drawable.ic_action_water_drop),
+            HomeListItem("PH", phData.value.toString(), phStatus.value!!,R.drawable.ic_action_ph),
+            HomeListItem("먹이",foodData.value.toString(), foodStatus.value!!,R.drawable.ic_action_food)
         )
         _homeItemList.value = list
     }
