@@ -111,6 +111,12 @@ class MainActivity : AppCompatActivity() {
                 PageType.Mypage -> {
                     loadFragment(MypageFragment())
                 }
+                PageType.AddMedicine->{
+                    loadFragment(MedicineAddTimeFragment())
+                }
+                PageType.EditMedicine->{
+                    loadFragment(MedicineEditTimeFragment())
+                }
             }
         })
         setNavigationItemClickListener()
@@ -164,6 +170,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.mainFrameLayout, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    private fun addFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.mainFrameLayout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

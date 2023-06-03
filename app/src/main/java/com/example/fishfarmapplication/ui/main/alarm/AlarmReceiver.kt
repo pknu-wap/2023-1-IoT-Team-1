@@ -48,7 +48,7 @@ class AlarmReceiver() : BroadcastReceiver() {
         }
 
         val notification = builder.setContentTitle(title)
-            .setContentText("SCHEDULE MANAGER")
+            .setContentText("어장관리")
             .setSmallIcon(androidx.appcompat.R.drawable.abc_btn_check_material)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)

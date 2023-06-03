@@ -1,46 +1,78 @@
 package com.example.fishfarmapplication.ui.main.recyclerviews
 
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fishfarmapplication.R
+import com.example.fishfarmapplication.databinding.ItemMedicineRecyclerViewBinding
+import java.text.SimpleDateFormat
+import java.util.logging.SimpleFormatter
 
-class MedicineListAdapter() : RecyclerView.Adapter<MedicineListAdapter.MedicineViewHolder>() {
+class MedicineListAdapter(arrayList: ArrayList<MedicineListItem>) : RecyclerView.Adapter<MedicineListAdapter.MedicineViewHolder>() {
 
-    var itemList= mutableListOf<MedicineListItem>()
+    var itemList: ArrayList<MedicineListItem>
 
-    inner class MedicineViewHolder(itemView: RecyclerView) : RecyclerView.ViewHolder(itemView){
-        val TimeTitleView: TextView = itemView.findViewById<TextView>(R.id.medicineItemTimeTextView)
-        val APMTextView: TextView = itemView.findViewById<TextView>(R.id.medicineItemAMPMTextView)
-        val medicineNameView: TextView = itemView.findViewById<TextView>(R.id.medicineItemNameTextView)
-        val descView: TextView = itemView.findViewById<TextView>(R.id.medicineItemDescTextView)
+    init {
+        itemList = arrayList
+    }
 
+
+    interface OnItemClickListener{
+        fun onItemClick(view: View, position: Int)
+    }
+    private lateinit var mOnItemClickListener: OnItemClickListener
+
+
+    companion object{
+        val yearStringFormatter = SimpleDateFormat("yyyy년MM월dd일")
+        val hourStringFormatter = SimpleDateFormat("HH:MM")
+        val timeStringFormatter = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
+        val aaStringFormat = SimpleDateFormat("aa")
+    }
+
+    inner class MedicineViewHolder(private val binding:ItemMedicineRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(position: Int){
-            TimeTitleView.text = itemList[position].time.toString()
-            if(itemList[position].time >= 1200){
-                APMTextView.text = "오전"
-            }else{
-                APMTextView.text = "오후"
+            val time = timeStringFormatter.parse(itemList[position].time)
+            val name = itemList[position].name
+            val desc = itemList[position].desc
+            with(binding){
+                medicineItemYear.text = yearStringFormatter.format(time)
+                medicineItemHourTextView.text = hourStringFormatter.format(time)
+                medicineItemAMPMTextView.text = aaStringFormat.format(time)
+                medicineItemNameTextView.text = name
+                medicineItemDescTitleTextView.text = desc
+                medicineItem.setOnClickListener {
+                    mOnItemClickListener.onItemClick(medicineItem, position)
+                }
             }
-//            APMTextView.text = itemList[position]
-            medicineNameView.text = itemList[position].name
-            descView.text=itemList[position].desc
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineListAdapter.MedicineViewHolder {
+        val binding = ItemMedicineRecyclerViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return MedicineViewHolder(binding)
 
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return itemList.count()
     }
 
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(position)
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+        mOnItemClickListener = onItemClickListener
+    }
+
+    fun viewClicked(item: MedicineListItem){
+        Log.d("clicked?", item.toString())
     }
 }
 

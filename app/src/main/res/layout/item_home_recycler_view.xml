@@ -5,7 +5,6 @@
     android:orientation="horizontal">
 
     <data>
-
         <variable
             name="listitem"
             type="com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem" />
@@ -19,41 +18,43 @@
             android:id="@+id/homeItemLeftMarginLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingLeft="10dp"
             app:layout_constraintEnd_toStartOf="@+id/homeItemDescLayout"
-            app:layout_constraintHorizontal_weight="0.2"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1.2"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/homeItemIcon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_action_water_drop"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/homeItemDescLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toStartOf="@id/homeItemRightMarginLayout"
-            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@id/homeItemLeftMarginLayout">
 
             <TextView
-                android:id="@+id/itemDescTitle"
+                android:id="@+id/homeItemDescTitle"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:text="@{listitem.title}"
                 android:textAlignment="center"
                 android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
-                android:textSize="25dp"
-                app:layout_constraintBottom_toTopOf="@id/itemDescData"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_weight="2" />
-
-            <TextView
-                android:id="@+id/itemDescData"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="@{listitem.data}"
-                android:textAlignment="center"
-                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
-                android:textSize="20dp"
+                android:textSize="35dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemDescTitle"
-                app:layout_constraintVertical_weight="1" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,7 +64,24 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="5"
-            app:layout_constraintStart_toEndOf="@id/homeItemDescLayout" />
+            app:layout_constraintStart_toEndOf="@id/homeItemDescLayout"
+            >
+
+            <TextView
+                android:id="@+id/homeItemDescData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{listitem.data}"
+                android:textAlignment="center"
+                android:textColor="@{listitem.status ? @color/data_skyblue : @color/red_bad}"
+                android:textSize="35dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_weight="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,8 +36,10 @@ class AlarmFunctions(private val context: Context){
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
         var datetime = Date()
+        Log.d("date", datetime.toString())
         try {
             datetime = dateFormat.parse(time) as Date
+            Log.d("dateparse", datetime.toString())
         } catch (e: ParseException) {
             e.printStackTrace()
         }

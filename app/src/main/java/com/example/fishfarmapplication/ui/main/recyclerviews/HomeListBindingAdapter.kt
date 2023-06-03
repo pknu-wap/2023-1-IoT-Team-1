@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 object HomeListBindingAdapter {
-    @BindingAdapter("items")
+    @BindingAdapter("homeitems")
     @JvmStatic
     fun setItems(recyclerView: RecyclerView, items : ArrayList<HomeListItem>){
         if(recyclerView.adapter == null)

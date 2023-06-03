@@ -5,5 +5,7 @@ enum class PageType() {
     Graph,
     Led,
     Medicine,
-    Mypage
+    Mypage,
+    AddMedicine,
+    EditMedicine
 }

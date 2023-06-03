@@ -373,7 +373,7 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
-                items="@{viewModelXml.homeItemList}"
+                homeitems="@{viewModelXml.homeItemList}"
                 app:layout_constraintStart_toEndOf="@+id/homelowerleftMarginLayout"
                 app:layout_constraintEnd_toStartOf="@+id/homelowerRightMarginLayout"
                 app:layout_constraintHorizontal_weight="40"

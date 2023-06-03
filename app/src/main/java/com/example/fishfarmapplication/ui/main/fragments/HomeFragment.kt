@@ -1,7 +1,6 @@
 package com.example.fishfarmapplication.ui.main.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,8 @@ import androidx.fragment.app.*
 import androidx.lifecycle.Observer
 import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.FragmentHomeBinding
-import com.example.fishfarmapplication.ui.main.viewmodels.PageViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListAdapter
-import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListDeco
-import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
+import com.example.fishfarmapplication.ui.main.recyclerviews.RecyclerViewHolderHightDeco
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
 import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 
@@ -49,7 +46,7 @@ class HomeFragment : Fragment() {
 //        itemList.add(HomeListItem("PH",recentcurrentData.phData.toString(), homeViewModel.phStatus.value!!))
 //        itemList.add(HomeListItem("먹이",recentcurrentData.foodData.toString(), homeViewModel.foodStatus.value!!))
 
-        val itemDeco = HomeListDeco(30)
+        val itemDeco = RecyclerViewHolderHightDeco(30)
 
         binding.homeRecyclerView.addItemDecoration(itemDeco)
         binding.homeCenterStatusLayout.setOnClickListener {
