@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeMain"
+    android:orientation="vertical"
+    tools:context=".ui.main.fragments.HomeFragment"
+    >
+    <data>
+        <variable
+            name="viewModelXml"
+            type="com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel" />
+        <variable
+            name="stringData"
+            type="com.example.fishfarmapplication.ui.main.StringData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeUpperLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@{viewModelXml.homeStatus ? @color/data_skyblue : @color/red_bad}"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/homeCenterLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="0.9">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeUpperLeftMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/homeUpperConstraintLayout_Status"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeUpperConstraintLayout_Status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toStartOf="@+id/homeUpperRightMarginLayout"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/homeUpperLeftMarginLayout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeUpperCircleTopMarginLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@id/homeUpperCircleLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_weight="0.3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeUpperCircleLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/upper_status_textview_background"
+                    app:layout_constraintBottom_toTopOf="@id/homeUpperCircleBottomMarginLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/homeUpperCircleTopMarginLayout"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintVertical_weight="2">
+
+                    <TextView
+                        android:id="@+id/homeUpperCircleStatusTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="상태"
+                        android:textColor="@{viewModelXml.homeStatus ? @color/data_skyblue : @color/red_bad}"
+                        android:textSize="35dp"
+                        app:layout_constraintBottom_toTopOf="@+id/homeUpperCircleStatusDesc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/homeUpperCircleStatusDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModelXml.homeStatus ? stringData.좋음.name: stringData.나쁨.name}"
+                        android:textColor="@{viewModelXml.homeStatus ? @color/data_skyblue : @color/red_bad}"
+                        android:textSize="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/homeUpperCircleStatusTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeUpperCircleBottomMarginLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/homeUpperCircleLayout"
+                    app:layout_constraintVertical_weight="0.3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeUpperRightMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toEndOf="@id/homeUpperConstraintLayout_Status" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/homeCenterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/homeUpperLayout"
+            app:layout_constraintBottom_toTopOf="@id/homeCenterLowerMarginLayout"
+            app:layout_constraintVertical_weight="0.3"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterStatusUpBackgroundLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintVertical_weight="1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/homeCenterStatusLowBackgroundLayout"
+                    android:background="@{viewModelXml.homeStatus ? @drawable/home_center_layout_blue_background : @drawable/home_center_layout_red_background}"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterStatusLowBackgroundLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintVertical_weight="1"
+                    app:layout_constraintTop_toBottomOf="@+id/homeCenterStatusUpBackgroundLayout"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterLeftMarginLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/homeCenterStatusLayout"
+                    app:layout_constraintHorizontal_weight="0.3"
+                    >
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterStatusBackgroundLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/homeCenterLeftMarginLayout"
+                    app:layout_constraintEnd_toStartOf="@id/homeCenterRightMarginLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterStatusLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/homeCenterLeftMarginLayout"
+                    app:layout_constraintEnd_toStartOf="@id/homeCenterRightMarginLayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    android:background="@drawable/home_center_layout_status_background">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homeWaterTemperatureLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/homePhLayout"
+                        app:layout_constraintHorizontal_weight="1">
+
+                        <TextView
+                            android:id="@+id/homeWaterTemperatureTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/homeWaterTemperatureData"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="수온"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.waterTemperatureStatus ? @color/data_skyblue : @color/red_bad}"/>
+
+                        <TextView
+                            android:id="@+id/homeWaterTemperatureData"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/homeWaterTemperatureTitle"
+                            app:layout_constraintBottom_toTopOf="@+id/homeWaterTemperatureStandard"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="@{String.valueOf(viewModelXml.waterTemperatureData)}"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.waterTemperatureStatus ? @color/data_skyblue : @color/red_bad}"/>
+
+                        <TextView
+                            android:id="@+id/homeWaterTemperatureStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/homeWaterTemperatureData"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:text="@{String.valueOf(viewModelXml.waterTemperatureStandard)}"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:textColor="@color/gray"
+                            app:layout_constraintVertical_weight="1"
+                            />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homePhLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toEndOf="@id/homeWaterTemperatureLayout"
+                        app:layout_constraintEnd_toStartOf="@+id/homeFoodLayout"
+                        app:layout_constraintHorizontal_weight="1">
+
+                        <TextView
+                            android:id="@+id/homePhTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/homePhData"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="PH"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.phStatus ? @color/data_skyblue : @color/red_bad}"/>
+
+                        <TextView
+                            android:id="@+id/homePhData"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@+id/homePhTitle"
+                            app:layout_constraintBottom_toTopOf="@id/homePhStandard"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="@{String.valueOf(viewModelXml.phData)}"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.phStatus ? @color/data_skyblue : @color/red_bad}"
+                            />
+
+                        <TextView
+                            android:id="@+id/homePhStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/homePhData"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="@{String.valueOf(viewModelXml.phStandard)}"
+                            android:textSize="20dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray"
+                            />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/homeFoodLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toEndOf="@id/homePhLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="1">
+
+                        <TextView
+                            android:id="@+id/homeFoodTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/homeFoodData"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="먹이"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.foodStatus ? @color/data_skyblue : @color/red_bad}"
+                            />
+
+                        <TextView
+                            android:id="@+id/homeFoodData"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/homeFoodTitle"
+                            app:layout_constraintBottom_toTopOf="@+id/homeFoodStandard"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="@{String.valueOf(viewModelXml.foodData)}"
+                            android:textAlignment="center"
+                            android:textSize="25dp"
+                            android:textColor="@{viewModelXml.foodStatus ? @color/data_skyblue : @color/red_bad}"
+                            />
+
+                        <TextView
+                            android:id="@+id/homeFoodStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@id/homeFoodData"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintVertical_weight="1"
+                            android:text="@{String.valueOf(viewModelXml.foodStandard)}"
+                            android:textSize="20dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/gray"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeCenterRightMarginLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@+id/homeCenterStatusLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="0.3"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeCenterLowerMarginLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/homeCenterLayout"
+            app:layout_constraintBottom_toTopOf="@id/homeLowerLayout"
+            app:layout_constraintVertical_weight="0.08"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeLowerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeCenterLowerMarginLayout"
+            app:layout_constraintVertical_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homelowerleftMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/homeRecyclerView"
+                app:layout_constraintHorizontal_weight="1"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                items="@{viewModelXml.homeItemList}"
+                app:layout_constraintStart_toEndOf="@+id/homelowerleftMarginLayout"
+                app:layout_constraintEnd_toStartOf="@+id/homelowerRightMarginLayout"
+                app:layout_constraintHorizontal_weight="40"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homelowerRightMarginLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/homeRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</layout>
