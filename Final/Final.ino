@@ -2,7 +2,6 @@
  Unsolved problem 
  - get Time and date from NTPClient.
 */
-
 #include <WiFi.h>
 #include <Firebase_ESP_Client.h>
 #include <addons/TokenHelper.h>
@@ -53,8 +52,8 @@ void servoSetup(){
   ESP32PWM::allocateTimer(1);
   ESP32PWM::allocateTimer(2);
   ESP32PWM::allocateTimer(3);
-  myservo.setPeriodHertz(50);    
-  myservo.attach(servoPin, 500, 2400); 
+  servoMotor.setPeriodHertz(50);    
+  servoMotor.attach(SERVO_PIN, 500, 2400); 
 }
 
 long Ultra(){
@@ -193,8 +192,9 @@ void setup() {
 
 void loop() {
   int R_s, B_s, G_s;
-  long Dist;
+  long Dist, servoDelay;
   float Temp;
+  double servoTime;
   Firebase.ready();
   Firebase.authenticated();
 
@@ -212,6 +212,13 @@ void loop() {
     Serial.printf("Get distacne... %s\n", Firebase.RTDB.getInt(&fbdo, F("/users/arduino/sensors/ultrasonic")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
     Serial.printf("Set Temperature... %s\n", Firebase.RTDB.setInt(&fbdo, F("/users/arduino/sensors/temp"), Temp) ? "ok" : fbdo.errorReason().c_str());
     Serial.printf("Get Temperature... %s\n", Firebase.RTDB.getInt(&fbdo, F("/users/arduino/sensors/temp")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
+    if(Firebase.RTDB.getInt(&fbdo, "/users/arduino/servo/standard")){
+      if(fbdo.dataType() == "float"){
+        servoTime = fbdo.floatData();
+        Serial.printf("servoTime: %lf", servoTime);
+      }
+    }
+    servoDelay = (int)(servoTime * 1000);
     
     R_s = R;
     B_s = B;
@@ -220,7 +227,15 @@ void loop() {
     if(R!= R_s || B != B_s || G != G_s) {
       setColor(R, G, B);
     }
+
+    for(int pos = 0; pos<= 180; pos ++)
+    {
+      servoMotor.write(pos);
+    }
+    delay(servoDelay);
+    for(int pos = 180; pos >=0; pos--) {
+      servoMotor.write(pos);
+    }
     delay(500);
   }
-
 }

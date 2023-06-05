@@ -12,7 +12,7 @@ void setup() {
   myservo.setPeriodHertz(50);    
   myservo.attach(servoPin, 500, 2400); 
 }
- 
+
 void loop() {
   for (pos = 0; pos <= 180; pos += 1) {
     myservo.write(pos); 
