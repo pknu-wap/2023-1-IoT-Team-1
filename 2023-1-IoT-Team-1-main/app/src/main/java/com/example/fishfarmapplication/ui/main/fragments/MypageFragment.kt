@@ -2,6 +2,7 @@ package com.example.fishfarmapplication.ui.main.fragments
 
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,15 +45,12 @@ class MypageFragment : Fragment() {
         }
         binding.imageView3.setOnClickListener {
             ImageFixDialog().show(childFragmentManager,ImageFixDialog.TAG)
-
-            // 이미지 클릭시, 행동
         }
 
-        return inflater.inflate(R.layout.fragment_mypage, container, false)
+        return binding.root
     }
 
-    private fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-
-    }
+//    private fun loadFragment(fragment: Fragment){
+//        val transaction = supportFragmentManager.beginTransaction()
+//    }
 }

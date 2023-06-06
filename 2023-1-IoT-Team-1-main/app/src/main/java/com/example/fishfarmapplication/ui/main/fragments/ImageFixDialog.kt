@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.fishfarmapplication.Manifest
 import com.example.fishfarmapplication.databinding.FragmentDialogMedicineCenterBinding
 import com.example.fishfarmapplication.databinding.FragmentImageFixDialogBinding
 import com.example.fishfarmapplication.ui.main.viewmodels.HomeViewModel
