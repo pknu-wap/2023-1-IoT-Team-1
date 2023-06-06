@@ -53,9 +53,13 @@ class LedFragment : Fragment() {
         binding.btnLed.setOnClickListener {
             setBtnText()
             if (ledState > 0) {
-                ledRef.child("ledstate").setValue(true)
+                ledRef.child("R").setValue(255)
+                ledRef.child("G").setValue(255)
+                ledRef.child("B").setValue(255)
             } else {
-                ledRef.child("ledstate").setValue(false)
+                ledRef.child("R").setValue(0)
+                ledRef.child("G").setValue(0)
+                ledRef.child("B").setValue(0)
             }
         }
         return binding.root
