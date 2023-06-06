@@ -1,7 +1,3 @@
-/*
- Unsolved problem 
- - get Time and date from NTPClient.
-*/
 #include <WiFi.h>
 #include <Firebase_ESP_Client.h>
 #include <addons/TokenHelper.h>
@@ -18,7 +14,7 @@
 #define DATABASE_URL "wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app" 
 
 #define USER_EMAIL "kjghost1@pukyong.ac.kr"
-#define USER_PASSWORD "password!"
+#define USER_PASSWORD "password"
 
 #define PIN_RED 21 // GIOP21
 #define PIN_GREEN 22 // GIOP22
@@ -152,7 +148,9 @@ void GetLED() {
 
 void setup() {  
   Serial.begin(115200);
-  
+
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
   ledcAttachPin(PIN_RED, 0);
   ledcAttachPin(PIN_GREEN, 1);
   ledcAttachPin(PIN_BLUE, 2);
@@ -206,13 +204,13 @@ void loop() {
     Dist = Ultra(); // 먹이통 잔여량 확인
     Temp = getTemp(); // 수온 센서 값 받아오기
     
-    Serial.printf("Post day... %s\n", Firebase.RTDB.setString(&fbdo, F("/users/arduino/time"), time_string)); // 시간 올려주기
-    Serial.printf("Get day... %s\n", Firebase.RTDB.getString(&fbdo, F("/users/arduino/time")) ? fbdo.to<const char *>() : fbdo.errorReason().c_str());
+//    Serial.printf("Post day... %s\n", Firebase.RTDB.setString(&fbdo, F("/users/arduino/time"), time_string)); // 시간 올려주기
+//    Serial.printf("Get day... %s\n", Firebase.RTDB.getString(&fbdo, F("/users/arduino/time")) ? fbdo.to<const char *>() : fbdo.errorReason().c_str());
     Serial.printf("Set distance... %s\n", Firebase.RTDB.setInt(&fbdo, F("/users/arduino/sensors/ultrasonic"), Dist) ? "ok" : fbdo.errorReason().c_str());
     Serial.printf("Get distacne... %s\n", Firebase.RTDB.getInt(&fbdo, F("/users/arduino/sensors/ultrasonic")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
     Serial.printf("Set Temperature... %s\n", Firebase.RTDB.setInt(&fbdo, F("/users/arduino/sensors/temp"), Temp) ? "ok" : fbdo.errorReason().c_str());
     Serial.printf("Get Temperature... %s\n", Firebase.RTDB.getInt(&fbdo, F("/users/arduino/sensors/temp")) ? String(fbdo.to<int>()).c_str() : fbdo.errorReason().c_str());
-    if(Firebase.RTDB.getInt(&fbdo, "/users/arduino/servo/standard")){
+    if(Firebase.RTDB.getInt(&fbdo, "/users/arduino/sensors/feed")){
       if(fbdo.dataType() == "float"){
         servoTime = fbdo.floatData();
         Serial.printf("servoTime: %lf", servoTime);

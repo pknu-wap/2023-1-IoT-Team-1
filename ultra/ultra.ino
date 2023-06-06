@@ -1,40 +1,34 @@
-/*
- * This ESP32 code is created by esp32io.com
- *
- * This ESP32 code is released in the public domain
- *
- * For more detail (instruction and wiring diagram), visit https://esp32io.com/tutorials/esp32-rgb-led
- */
 
-#define PIN_RED    23 // GIOP23
-#define PIN_GREEN  22 // GIOP22
-#define PIN_BLUE   21 // GIOP21
+#define TRIG 32
+#define ECHO 33
+
+long ultrason_duration;
+float distance_cm;
 
 void setup() {
-  pinMode(PIN_RED,   OUTPUT);
-  pinMode(PIN_GREEN, OUTPUT);
-  pinMode(PIN_BLUE,  OUTPUT);
+  Serial.begin(115200);
+  pinMode(TRIG, OUTPUT); // We configure the trig as output
+  pinMode(ECHO, INPUT); // We configure the echo as input
 }
 
 void loop() {
-  // color code #00C9CC (R = 0,   G = 201, B = 204)
-  analogWrite(PIN_RED,   0);
-  analogWrite(PIN_GREEN, 201);
-  analogWrite(PIN_BLUE,  204);
+  // Set up the signal
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+ // Create a 10 µs impulse
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
 
-  delay(1000); // keep the color 1 second
+  // Return the wave propagation time (in µs)
+  ultrason_duration = pulseIn(ECHO, HIGH);
 
-  // color code #F7788A (R = 247, G = 120, B = 138)
-  analogWrite(PIN_RED,   247);
-  analogWrite(PIN_GREEN, 120);
-  analogWrite(PIN_BLUE,  138);
+//distance calculation
+  distance_cm = ultrason_duration * 17 /1000;
 
-  delay(1000); // keep the color 1 second
+  // We print the distance on the serial port
+  Serial.print("Distance (cm): ");
+  Serial.println(distance_cm);
 
-  // color code #34A853 (R = 52,  G = 168, B = 83)
-  analogWrite(PIN_RED,   52);
-  analogWrite(PIN_GREEN, 168);
-  analogWrite(PIN_BLUE,  83);
-
-  delay(1000); // keep the color 1 second
+  delay(1000);
 }
