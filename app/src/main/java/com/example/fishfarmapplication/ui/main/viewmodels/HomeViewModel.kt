@@ -1,10 +1,12 @@
 package com.example.fishfarmapplication.ui.main.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
+import java.text.SimpleDateFormat
 import java.util.Date
 
 class HomeViewModel : ViewModel(){
@@ -41,8 +43,14 @@ class HomeViewModel : ViewModel(){
 
     val homeItemList : LiveData<ArrayList<HomeListItem>> get() = _homeItemList
 
-    private lateinit var homeItems : ArrayList<HomeListItem>
+    private var homeItems : ArrayList<HomeListItem>
 
+    companion object{
+        val yearStringFormatter = SimpleDateFormat("yyyy년MM월dd일")
+        val hourStringFormatter = SimpleDateFormat("HH:mm")
+        val timeStringFormatter = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
+        val aaStringFormat = SimpleDateFormat("aa")
+    }
     init {
         _homeStatus.value = true
 
@@ -150,6 +158,15 @@ class HomeViewModel : ViewModel(){
             _homeStatus.value = false
 
         updateHomeList()
+    }
+
+    fun displayFoodData(){
+        val milliseSeconds = System.currentTimeMillis()
+        val second = milliseSeconds!!.div(1000)
+        val min = milliseSeconds!!.div(1000).div(60)
+        val hour = milliseSeconds!!.div(1000).div(60).div(60)
+        val day = hour.div(24)
+        Log.d("HomeViewModel)", "day : " + day)
     }
 
 
