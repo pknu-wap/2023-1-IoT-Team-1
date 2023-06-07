@@ -107,6 +107,7 @@
                 android:id="@+id/homeUpperRightMarginLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="0.3"
                 app:layout_constraintStart_toEndOf="@id/homeUpperConstraintLayout_Status" />
@@ -133,7 +134,16 @@
                     app:layout_constraintVertical_weight="1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/homeCenterStatusLowBackgroundLayout"
-                    android:background="@{viewModelXml.homeStatus ? @drawable/home_center_layout_blue_background : @drawable/home_center_layout_red_background}"/>
+                    android:background="@{viewModelXml.homeStatus ? @drawable/home_center_layout_blue_background : @drawable/home_center_layout_red_background}">
+
+                    <Button
+                        android:id="@+id/btnFeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/homeCenterStatusLowBackgroundLayout"
