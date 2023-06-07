@@ -6,6 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -45,6 +50,10 @@ class HomeViewModel : ViewModel(){
 
     private var homeItems : ArrayList<HomeListItem>
 
+    private val database =
+        Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    private val usersRef = database.getReference("users").child("arduino").child("sensors")
+
     companion object{
         val yearStringFormatter = SimpleDateFormat("yyyy년MM월dd일")
         val hourStringFormatter = SimpleDateFormat("HH:mm")
@@ -62,6 +71,33 @@ class HomeViewModel : ViewModel(){
         _waterTemperatureData.value = 10F
         _phData.value = 10F
         _foodData.value = 4F
+
+        usersRef.child("water").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val waterValue = dataSnapshot.getValue(Float::class.java)
+                _waterTemperatureData.value = waterValue
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        usersRef.child("pH").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val phValue = dataSnapshot.getValue(Float::class.java)
+                _phData.value = phValue
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+        usersRef.child("feed").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val foodValue = dataSnapshot.getValue(Float::class.java)
+                _foodData.value = foodValue
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
         _waterTemperatureStatus.value = if(waterTemperatureStandard.value == waterTemperatureData.value) true else false
         _phStatus.value = if(phStandard.value == phData.value) true else false
