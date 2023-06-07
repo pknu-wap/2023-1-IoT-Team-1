@@ -55,7 +55,6 @@
                     android:id="@+id/ledStatusTestView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="애니메이션 효과 예정"
                     android:textAlignment="center"
                     android:textSize="50dp"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -146,6 +145,15 @@
                 app:layout_constraintEnd_toStartOf="@id/ledPowerButtonRightMarginLayout"
                 app:layout_constraintHorizontal_weight="1"
                 android:background="@drawable/led_power_btn">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_action_power_on"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

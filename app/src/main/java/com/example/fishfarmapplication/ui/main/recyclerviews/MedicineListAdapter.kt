@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.databinding.ItemMedicineRecyclerViewBinding
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.logging.SimpleFormatter
+import kotlin.collections.ArrayList
 
 class MedicineListAdapter(arrayList: ArrayList<MedicineListItem>) : RecyclerView.Adapter<MedicineListAdapter.MedicineViewHolder>() {
 
@@ -28,7 +30,7 @@ class MedicineListAdapter(arrayList: ArrayList<MedicineListItem>) : RecyclerView
 
     companion object{
         val yearStringFormatter = SimpleDateFormat("yyyy년MM월dd일")
-        val hourStringFormatter = SimpleDateFormat("HH:MM")
+        val hourStringFormatter = SimpleDateFormat("HH:mm")
         val timeStringFormatter = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
         val aaStringFormat = SimpleDateFormat("aa")
     }
@@ -37,6 +39,9 @@ class MedicineListAdapter(arrayList: ArrayList<MedicineListItem>) : RecyclerView
 
         fun bind(position: Int){
             val time = timeStringFormatter.parse(itemList[position].time)
+//            val calendar = Calendar.getInstance()
+//            calendar.time = time
+            Log.d("test", time.toString())
             val name = itemList[position].name
             val desc = itemList[position].desc
             with(binding){

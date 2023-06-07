@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
 import com.example.fishfarmapplication.ui.main.recyclerviews.MedicineListItem
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.min
 
 class MedicineViewModel : ViewModel() {
     private var _medicineRemainTime = MutableLiveData<Float>()
@@ -27,9 +30,16 @@ class MedicineViewModel : ViewModel() {
         _clickedMedicineItem.value = -1
 
         val medicineItems = arrayListOf(
-            MedicineListItem("2023-05-31 12:13:00","test알람","테스트알람입니다~")
+            MedicineListItem("2023-10-31 12:13:00","test알람","테스트알람입니다~")
         )
         _medicineItemList.value = medicineItems
+    }
+
+    companion object{
+        val yearStringFormatter = SimpleDateFormat("yyyy년MM월dd일")
+        val hourStringFormatter = SimpleDateFormat("HH:mm")
+        val timeStringFormatter = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
+        val aaStringFormat = SimpleDateFormat("aa")
     }
 
     fun setMedicineItemList(item:MedicineListItem, position: Int){
@@ -43,6 +53,19 @@ class MedicineViewModel : ViewModel() {
     fun setclickedMedicineItem(int: Int){
         _clickedMedicineItem.value = int
     }
+    fun removeMedicineItem(position: Int){
+        _medicineItemList.value!!.removeAt(position)
+    }
 
+    fun getMinTime() : Date{
+        val list = _medicineItemList.value!!
+        var min = timeStringFormatter.parse(list[0].time)
+        list.forEach({
+            val indexTime = timeStringFormatter.parse(it.time)
+            if(min < indexTime)
+                min = indexTime
+        })
+        return min
+    }
 
 }

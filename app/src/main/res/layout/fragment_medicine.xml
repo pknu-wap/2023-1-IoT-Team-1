@@ -38,18 +38,43 @@
                 android:background="@drawable/home_center_layout_blue_background">
 
                 <TextView
-                    android:id="@+id/medicinetextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/medicineRemainTime"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="다음 약 투여 까지"
+                    android:textSize="50dp"
+                    android:textColor="@color/white"
+                    />
+
+                <Chronometer
+                    android:id="@+id/medicineRemainTime"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="12시간 45분 후 약 투여 주기가   옵니다"
                     android:textColor="#FFFFFF"
-                    android:textSize="40dp"
+                    android:textSize="50dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:countDown="true"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/medicineRemainTime"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="남았습니다!"
+                    android:textSize="50dp"
+                    android:textColor="@color/white"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,7 +114,6 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:adapter="@{adapter}"
-
                 app:layout_constraintHorizontal_weight="40"
                 app:layout_constraintStart_toEndOf="@id/medicineLowerLeftMarginLayout"
                 app:layout_constraintEnd_toStartOf="@+id/medicineLowerRightMarginLayout"/>
@@ -119,6 +143,7 @@
             app:fabCustomSize="75dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_action_plus_button"
             app:maxImageSize="40dp" />
 
 
