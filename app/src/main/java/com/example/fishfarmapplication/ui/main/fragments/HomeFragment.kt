@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
 
             android.os.Handler(Looper.getMainLooper()).postDelayed({
                 myRef.child("servo").setValue(0)
-            }, 1000)
+            }, 10000)
         }
 
 //        binding.homeCenterStatusLayout.setOnClickListener {

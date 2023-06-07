@@ -1,19 +1,18 @@
 package com.example.fishfarmapplication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.fishfarmapplication.databinding.ActivityLoginBinding
+import com.example.fishfarmapplication.databinding.FragmentNewIdBinding
+import com.example.fishfarmapplication.ui.main.fragments.NewIdFragment
 import com.example.fishfarmapplication.ui.main.models.User
 import com.example.fishfarmapplication.ui.main.viewmodels.IdViewModel
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import androidx.lifecycle.LiveData
 
 
 class LoginActivity : AppCompatActivity() {
@@ -27,36 +26,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.loginImageView.setOnClickListener { signin() }
-    }
-
-    fun signup() {
-        with(binding) {
-            val id = editId.text.toString()
-            val password = editPassword.text.toString()
-
-            if (id.isNotEmpty() && password.isNotEmpty()) {
-                usersRef.child(id).get().addOnSuccessListener {
-                    if (it.exists()) {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "아이디가 존재합니다.",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-                    } else {
-                        val user = User(id, password)
-                        usersRef.child(id).setValue(user)
-                        signin()
-                    }
-                }
-            } else {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "아이디, 비밀번호를 모두 입력해야 합니다.",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-            }
+        binding.imageView6.setOnClickListener {
+            val newIdFragment = NewIdFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.LoginText, newIdFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 
