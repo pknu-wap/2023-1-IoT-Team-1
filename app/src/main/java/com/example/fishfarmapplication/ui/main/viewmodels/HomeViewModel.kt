@@ -72,7 +72,11 @@ class HomeViewModel : ViewModel(){
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (childSnapshot in dataSnapshot.children) {
                     val childValue = childSnapshot.getValue(Float::class.java)
-                    _waterTemperatureData.value = childValue
+                    if (childValue != null) {
+                        setWaterTemperatureData(childValue)
+                    } else {
+                        setWaterTemperatureData(0f)
+                    }
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
@@ -83,7 +87,11 @@ class HomeViewModel : ViewModel(){
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (childSnapshot in dataSnapshot.children) {
                     val childValue = childSnapshot.getValue(Float::class.java)
-                    _phData.value = childValue
+                    if (childValue != null) {
+                        setPhData(childValue)
+                    } else {
+                        setPhData(0f)
+                    }
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
@@ -93,7 +101,11 @@ class HomeViewModel : ViewModel(){
         usersRef.child("feed").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val foodValue = dataSnapshot.getValue(Float::class.java)
-                _foodData.value = foodValue
+                if (foodValue != null) {
+                    setFoodData(foodValue)
+                } else {
+                    setFoodData(0f)
+                }
             }
             override fun onCancelled(error: DatabaseError) {
             }
@@ -172,51 +184,30 @@ class HomeViewModel : ViewModel(){
     }
 
     fun checkData(){
-        var standard = waterTemperatureStandard.value!!.toFloat()
-        var data = waterTemperatureData.value!!.toFloat()
-        if(standard >= data - 1 && standard <= data+1)
-            _waterTemperatureStatus.value = true
-        else
+        if(waterTemperatureData.value != waterTemperatureStandard.value){
             _waterTemperatureStatus.value = false
+        } else
+            _waterTemperatureStatus.value = true
 
-        standard = phStandard.value!!.toFloat()
-        data = phData.value!!.toFloat()
-        if(standard >= data - 1 && standard <= data+1)
-            _phStatus.value = true
-        else
+        if(phData.value != phStandard.value){
             _phStatus.value = false
+        }else
+            _phStatus.value = true
 
-        standard = foodStandard.value!!.toFloat()
-        data = foodData.value!!.toFloat()
-
-        if(standard >= data - 1 && standard <= data+1)
-            _foodStatus.value = true
-        else
+        if(foodData.value != foodStandard.value)
             _foodStatus.value = false
-//        if(waterTemperatureData.value != waterTemperatureStandard.value){
-//            _waterTemperatureStatus.value = false
-//        } else
-//            _waterTemperatureStatus.value = true
-
-//
-//        if(phData.value != phStandard.value){
-//            _phStatus.value = false
-//        }else
-//            _phStatus.value = true
-//
-//        if(foodData.value != foodStandard.value)
-//            _foodStatus.value = false
-//        else
-//            _foodStatus.value = true
+        else
+            _foodStatus.value = true
 
         if(waterTemperatureStatus.value!! && phStatus.value!!
             && foodStatus.value!!)
             _homeStatus.value = true
         else
             _homeStatus.value = false
-        displayFoodData()
+
         updateHomeList()
     }
+
 
     fun displayFoodData(){
         val milliseSeconds = System.currentTimeMillis()
