@@ -8,6 +8,7 @@ import com.example.fishfarmapplication.R
 import com.example.fishfarmapplication.ui.main.recyclerviews.HomeListItem
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -67,37 +68,36 @@ class HomeViewModel : ViewModel(){
         _phStandard.value = 10F
         _foodStandard.value = 4F
 
+        usersRef.child("water").limitToLast(1).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (childSnapshot in dataSnapshot.children) {
+                    val childValue = childSnapshot.getValue(Float::class.java)
+                    _waterTemperatureData.value = childValue
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
 
-        _waterTemperatureData.value = 10F
-        _phData.value = 10F
-        _foodData.value = 4F
+        usersRef.child("pH").limitToLast(1).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (childSnapshot in dataSnapshot.children) {
+                    val childValue = childSnapshot.getValue(Float::class.java)
+                    _phData.value = childValue
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
 
-//        usersRef.child("water").addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val waterValue = dataSnapshot.getValue(Float::class.java)
-//                _waterTemperatureData.value = waterValue
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//        })
-//
-//        usersRef.child("pH").addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val phValue = dataSnapshot.getValue(Float::class.java)
-//                _phData.value = phValue
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//        })
-//
-//        usersRef.child("feed").addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                val foodValue = dataSnapshot.getValue(Float::class.java)
-//                _foodData.value = foodValue
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//        })
+        usersRef.child("feed").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val foodValue = dataSnapshot.getValue(Float::class.java)
+                _foodData.value = foodValue
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
         _waterTemperatureStatus.value = if(waterTemperatureStandard.value == waterTemperatureData.value) true else false
         _phStatus.value = if(phStandard.value == phData.value) true else false
