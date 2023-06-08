@@ -85,7 +85,7 @@ class GraphFragment : Fragment() {
                     i += 1
                 }
 
-                val lineDataSet = LineDataSet(entries, "수온")
+                val lineDataSet = LineDataSet(entries, "pH")
                 lineDataSet.lineWidth = 2f
                 lineDataSet.circleRadius = 6f
                 lineDataSet.setDrawCircleHole(true)
