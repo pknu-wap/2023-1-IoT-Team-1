@@ -11,11 +11,11 @@ import kotlin.collections.ArrayList
 import kotlin.math.min
 
 class MedicineViewModel : ViewModel() {
-    private var _medicineRemainTime = MutableLiveData<Float>()
+    private var _medicineRemainTime = MutableLiveData<Long>()
 
     val dateFormat = SimpleDateFormat("yyyy-MM-dd H:mm:ss")
 
-    val medicineRemainTime : LiveData<Float> get() = _medicineRemainTime
+    val medicineRemainTime : LiveData<Long> get() = _medicineRemainTime
 
     private val _clickedMedicineItem = MutableLiveData<Int>()
     val clickedMedicineItem : LiveData<Int> get() = _clickedMedicineItem
@@ -25,7 +25,7 @@ class MedicineViewModel : ViewModel() {
     val medicineItemList : LiveData<ArrayList<MedicineListItem>> get() = _medicineItemList
 
     init {
-        _medicineRemainTime.value = 120608F //DD HH MM
+        _medicineRemainTime.value = 120608 //DD HH MM
 
         _clickedMedicineItem.value = -1
 

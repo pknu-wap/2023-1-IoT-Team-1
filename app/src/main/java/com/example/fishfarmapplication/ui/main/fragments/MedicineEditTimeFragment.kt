@@ -47,7 +47,6 @@ class MedicineEditTimeFragment : Fragment(), DatePicker.OnDateChangedListener {
         alarmFunctions = AlarmFunctions(requireContext())
         initViews(medicineViewModel.clickedMedicineItem.value!!)
 
-
         binding.addMedicineBackButton.setOnClickListener{
             PageViewModel.updageFragmentStatus(PageType.Medicine)
         }
@@ -88,7 +87,6 @@ class MedicineEditTimeFragment : Fragment(), DatePicker.OnDateChangedListener {
         val year = binding.addMedicineDatePicker.year
         val month = binding.addMedicineDatePicker.month +1
         val day = binding.addMedicineDatePicker.dayOfMonth
-
 
         val time = "$year-$month-$day $hour:$min:00" // 알람이 울리는 시간
         Log.d("set time : ", time)

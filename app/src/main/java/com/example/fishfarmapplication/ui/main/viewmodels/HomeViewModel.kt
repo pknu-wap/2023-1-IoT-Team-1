@@ -172,38 +172,64 @@ class HomeViewModel : ViewModel(){
     }
 
     fun checkData(){
-        if(waterTemperatureData.value != waterTemperatureStandard.value){
-            _waterTemperatureStatus.value = false
-        } else
+        var standard = waterTemperatureStandard.value!!.toFloat()
+        var data = waterTemperatureData.value!!.toFloat()
+        if(standard >= data - 1 && standard <= data+1)
             _waterTemperatureStatus.value = true
-
-        if(phData.value != phStandard.value){
-            _phStatus.value = false
-        }else
-            _phStatus.value = true
-
-        if(foodData.value != foodStandard.value)
-            _foodStatus.value = false
         else
+            _waterTemperatureStatus.value = false
+
+        standard = phStandard.value!!.toFloat()
+        data = phData.value!!.toFloat()
+        if(standard >= data - 1 && standard <= data+1)
+            _phStatus.value = true
+        else
+            _phStatus.value = false
+
+        standard = foodStandard.value!!.toFloat()
+        data = foodData.value!!.toFloat()
+
+        if(standard >= data - 1 && standard <= data+1)
             _foodStatus.value = true
+        else
+            _foodStatus.value = false
+//        if(waterTemperatureData.value != waterTemperatureStandard.value){
+//            _waterTemperatureStatus.value = false
+//        } else
+//            _waterTemperatureStatus.value = true
+
+//
+//        if(phData.value != phStandard.value){
+//            _phStatus.value = false
+//        }else
+//            _phStatus.value = true
+//
+//        if(foodData.value != foodStandard.value)
+//            _foodStatus.value = false
+//        else
+//            _foodStatus.value = true
 
         if(waterTemperatureStatus.value!! && phStatus.value!!
             && foodStatus.value!!)
             _homeStatus.value = true
         else
             _homeStatus.value = false
-
+        displayFoodData()
         updateHomeList()
     }
 
     fun displayFoodData(){
         val milliseSeconds = System.currentTimeMillis()
         val second = milliseSeconds!!.div(1000)
-        val min = milliseSeconds!!.div(1000).div(60)
-        val hour = milliseSeconds!!.div(1000).div(60).div(60)
+        val min = second.div(60)
+        val hour = min.div(60)
         val day = hour.div(24)
+
+        milliseSeconds
         Log.d("HomeViewModel)", "day : " + day)
     }
+
+
 
 
 

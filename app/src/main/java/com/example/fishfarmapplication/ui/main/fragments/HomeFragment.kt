@@ -26,8 +26,6 @@ class HomeFragment : Fragment() {
     private val database =
         Firebase.database("https://wap-iot-9494c-default-rtdb.asia-southeast1.firebasedatabase.app/")
     private lateinit var myRef: DatabaseReference
-
-    private lateinit var itemAdapter : HomeListAdapter
     private val idViewModel: IdViewModel by activityViewModels()
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +79,6 @@ class HomeFragment : Fragment() {
         })
         homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
             homeViewModel.checkData()
-
         })
 
         return binding.root

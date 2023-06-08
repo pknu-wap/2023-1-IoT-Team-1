@@ -21,11 +21,21 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/medicineItemStartMarginLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/medicineItemStartLayout"
+            >
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/medicineItemStartLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintHorizontal_weight="2.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/medicineItemStartMarginLayout"
             app:layout_constraintEnd_toStartOf="@id/medicineItemMiddleLayout"
             >
 
@@ -48,7 +58,7 @@
                     android:textColor="@color/black"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/medicineItemHourTextView"
-                    app:layout_constraintVertical_weight="1"/>
+                    app:layout_constraintVertical_weight="1.3"/>
 
                 <TextView
                     android:id="@+id/medicineItemHourTextView"
@@ -72,20 +82,44 @@
                 app:layout_constraintTop_toBottomOf="@id/medicineItemStart_TimeLayout"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <TextView
-                    android:id="@+id/medicineItemAMPMTextView"
-                    android:layout_width="match_parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/medicineItemAMPMMarginLayout"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="오전"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="40dp"
-                    android:gravity="left"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1.2"
                     app:layout_constraintStart_toStartOf="parent"
-                    />
+                    app:layout_constraintEnd_toStartOf="@id/medicineItemAMPM_TextLayout"
+                    >
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/medicineItemAMPM_TextLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintHorizontal_weight="15"
+                    app:layout_constraintStart_toEndOf="@id/medicineItemAMPMMarginLayout"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/medicineItemAMPMTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="오전"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="35dp"
+
+                        android:gravity="left"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -95,7 +129,7 @@
             android:id="@+id/medicineItemMiddleLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintHorizontal_weight="1.5"
             app:layout_constraintStart_toEndOf="@id/medicineItemStartLayout"
             app:layout_constraintEnd_toStartOf="@id/medicineItemEndLayout"
             >
@@ -105,7 +139,7 @@
             android:id="@+id/medicineItemEndLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@id/medicineItemMiddleLayout"
             app:layout_constraintEnd_toEndOf="parent"
             >
@@ -124,7 +158,7 @@
                     android:layout_height="match_parent"
                     app:layout_constraintHorizontal_weight="2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/medicineItemTriangleLayout">
+                    >
 
                     <TextView
                         android:id="@+id/medicineItemNameTextView"
@@ -143,40 +177,41 @@
 
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/medicineItemTriangleLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/medicineItemNameLayout"
-                    app:layout_constraintEnd_toEndOf="parent">
+                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                    android:id="@+id/medicineItemTriangleLayout"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    app:layout_constraintHorizontal_weight="1"-->
+                <!--                    app:layout_constraintStart_toEndOf="@id/medicineItemNameLayout"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent">-->
 
-                    <ImageView
-                        android:id="@+id/medicineItemTriangleimageView"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-                    <!--                    app:srcCompat="@drawable/down" />-->
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/medicineItemTriangleimageView"-->
+                <!--                        android:layout_width="30dp"-->
+                <!--                        android:layout_height="30dp"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/medicineItemMiddle_MidLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintVertical_weight="0.7"
+                app:layout_constraintVertical_weight="2.5"
                 app:layout_constraintTop_toBottomOf="@id/medicineItemMiddle_TopLayout"
-                app:layout_constraintBottom_toTopOf="@id/medicineItemMiddle_BottomLayout">
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/medicineItemDescTitleTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textStyle="bold"
                     android:textColor="@color/black"
+                    android:gravity="top"
                     android:textSize="25dp"
                     android:text="요약"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -185,20 +220,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/medicineItemMiddle_BottomLayout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintVertical_weight="1.3"
-                app:layout_constraintTop_toBottomOf="@id/medicineItemMiddle_MidLayout"
-                app:layout_constraintBottom_toBottomOf="parent">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

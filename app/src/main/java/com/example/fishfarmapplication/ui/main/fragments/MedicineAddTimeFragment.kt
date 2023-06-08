@@ -32,7 +32,6 @@ class MedicineAddTimeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAddMedicineBinding.inflate(inflater,container,false)
         alarmFunctions = AlarmFunctions(requireContext())
-
         binding.addMedicineBackButton.setOnClickListener{
             PageViewModel.updageFragmentStatus(PageType.Medicine)
         }
@@ -40,7 +39,6 @@ class MedicineAddTimeFragment : Fragment() {
             sumbitAlarm()
             PageViewModel.updageFragmentStatus(PageType.Medicine)
         }
-
         return binding.root
     }
 

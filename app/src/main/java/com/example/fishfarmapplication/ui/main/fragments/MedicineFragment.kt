@@ -24,11 +24,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class MedicineFragment : Fragment() {
     private val medicineViewModel : MedicineViewModel by activityViewModels()
     private val PageViewModel : PageViewModel by activityViewModels()
@@ -98,6 +93,11 @@ class MedicineFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        stopTimer()
+    }
+
     fun showEditFragment(){
         PageViewModel.updageFragmentStatus(PageType.EditMedicine)
     }
@@ -134,5 +134,9 @@ class MedicineFragment : Fragment() {
 //            binding.medicineRemainTime.setText(hourStringFormatter.format(time))
         }
         binding.medicineRemainTime.start()
+    }
+
+    fun stopTimer(){
+        binding.medicineRemainTime.stop()
     }
 }
